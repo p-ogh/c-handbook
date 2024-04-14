@@ -1,0 +1,42 @@
+package com.pogho.theCoach.sHandbook.DAO;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@MappedSuperclass
+public abstract class Member implements Serializable {
+    @Id
+    private UUID id;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    private int age;
+    private String gender;
+    private String role;
+    private String nationality;
+    @Column(name = "date_added")
+    private Date dateAdded;
+    private String status;
+    //private Date dateOfBirth;
+
+    public void updateMember(String firstName, String lastName, int age, String gender, String role, String nationality, String status) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.role = role;
+        this.nationality = nationality;
+        this.status = status;
+    }
+}
