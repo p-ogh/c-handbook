@@ -1,8 +1,8 @@
 package com.pogho.theCoach.sHandbook.integration;
 
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
+import com.pogho.theCoach.sHandbook.DTO.ErrorDTO;
 import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CoachControllerIntegrationTest {
@@ -43,8 +42,8 @@ public class CoachControllerIntegrationTest {
     @Test
     public void testGetCoachWithWrongID(){
         UUID randomUUID = UUID.randomUUID();
-        ResponseEntity<String> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ randomUUID, String.class);
+        ResponseEntity<ErrorDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ randomUUID, ErrorDTO.class);
         System.out.println(getResponseEntity.getBody());
-        assertEquals("No Coach found with ID: " + randomUUID, getResponseEntity.getBody());
+        assertEquals("No Coach found with ID: " + randomUUID, getResponseEntity.getBody().getMessage());
     }
 }

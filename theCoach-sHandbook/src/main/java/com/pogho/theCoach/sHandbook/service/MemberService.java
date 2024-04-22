@@ -1,25 +1,16 @@
 package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Coach;
-import com.pogho.theCoach.sHandbook.DAO.Member;
-import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
 import com.pogho.theCoach.sHandbook.DTO.MemberDTO;
 import com.pogho.theCoach.sHandbook.entities.CoachEntity;
 import com.pogho.theCoach.sHandbook.entities.MemberEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
 import com.pogho.theCoach.sHandbook.factory.CoachFactory;
-import com.pogho.theCoach.sHandbook.factory.MemberFactory;
 import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class MemberService {

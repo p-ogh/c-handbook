@@ -1,19 +1,19 @@
 package com.pogho.theCoach.sHandbook.validations;
 
-import com.pogho.theCoach.sHandbook.entities.MemberEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
+import com.pogho.theCoach.sHandbook.entities.RecordEntity;
+import com.pogho.theCoach.sHandbook.exceptions.NoMemberFoundException;
 
-public class MemberValidation {
+import java.util.UUID;
 
-    public static void validate(MemberEntity member){
-        if(member.getFirstName() == null || member.getFirstName().isEmpty()){
-            throw new NoNameException("First Name cannot be empty or null.");
-        }
+public class RecordValidation {
+
+    public static void validate(RecordEntity record){
+        validate(record.getAthleteId());
     }
 
-    public static void validate(String firstName){
-        if(firstName == null || firstName.isEmpty()){
-            throw new NoNameException("First Name cannot be empty or null.");
+    public static void validate(UUID athleteId){
+        if(athleteId == null){
+            throw new NoMemberFoundException("Athlete ID cannot be empty or null.");
         }
     }
 }

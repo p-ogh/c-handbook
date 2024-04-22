@@ -1,17 +1,12 @@
 package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Athlete;
-import com.pogho.theCoach.sHandbook.DAO.Coach;
 import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
-import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
 import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
+import com.pogho.theCoach.sHandbook.exceptions.NoMemberFoundException;
 import com.pogho.theCoach.sHandbook.factory.AthleteFactory;
-import com.pogho.theCoach.sHandbook.factory.CoachFactory;
 import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
 import com.pogho.theCoach.sHandbook.repository.AthleteRepository;
-import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import com.pogho.theCoach.sHandbook.validations.MemberValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +39,7 @@ public class AthleteService {
             return athleteDTO;
         }
         else {
-            throw new NoUserFoundException("No Athlete found with ID: " + oid);
+            throw new NoMemberFoundException("No Athlete found with ID: " + oid);
         }
     }
 
@@ -68,11 +63,11 @@ public class AthleteService {
             athlete.updateAthlete(athleteEntity.getFirstName(), athleteEntity.getLastName(),athleteEntity.getAge(), athleteEntity.getGender(), athleteEntity.getRole(),athleteEntity.getNationality(), athleteEntity.getStatus(), athleteEntity.getSport(), athlete.getJerseyNumber(), athleteEntity.getHeight(), athleteEntity.getWeight(), athleteEntity.getAvailability());
             athleteRepository.save(athlete);
 
-            AthleteDTO athleteDTO =  MemberMapper.toDto(optionalAthlete.get());
+            AthleteDTO athleteDTO =  MemberMapper.toDto(athlete);
             return athleteDTO;
         }
         else {
-            throw new NoUserFoundException("No Athlete found with ID: " + oid);
+            throw new NoMemberFoundException("No Athlete found with ID: " + oid);
         }
     }
 

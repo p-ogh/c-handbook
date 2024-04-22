@@ -1,11 +1,8 @@
 package com.pogho.theCoach.sHandbook.controller;
 
-import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
-import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.service.AthleteService;
-import com.pogho.theCoach.sHandbook.service.CoachService;
+import com.pogho.theCoach.sHandbook.DTO.RunSessionDTO;
+import com.pogho.theCoach.sHandbook.entities.RunSessionEntity;
+import com.pogho.theCoach.sHandbook.service.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,50 +11,58 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/athletes")
+@RequestMapping("/session/run")
 @RestController
-public class AthleteController {
+public class RunSessionController {
     @Autowired
-    private AthleteService athleteService;
+    private RunService runService;
+
+    //getAllRunsforAll Athletes
+    @GetMapping("all")
+    public ResponseEntity<List<RunSessionDTO>> fetchRunsList()
+    {
+        return new ResponseEntity<>(runService.fetchRunsList(), HttpStatus.OK);
+
+    }
 
     //getUsers
-    @GetMapping("all")
-    public ResponseEntity<List<AthleteDTO>> fetchAthletesList()
+    @GetMapping("athlete/{oid}/all")
+    public ResponseEntity<List<RunSessionDTO>> fetchRunsListByAthlete(@PathVariable("oid") UUID oid)
     {
-        return new ResponseEntity<>(athleteService.fetchAthletesList(), HttpStatus.OK);
+        return new ResponseEntity<>(runService.fetchRunsListByAthlete(oid), HttpStatus.OK);
 
     }
 
     //getUser
-    @GetMapping("athlete/{oid}")
-    public ResponseEntity<AthleteDTO> fetchAthlete(@PathVariable("oid") UUID oid)
+    @GetMapping("{oid}")
+    public ResponseEntity<RunSessionDTO> fetchRun(@PathVariable("oid") UUID oid)
     {
-        return new ResponseEntity<>(athleteService.fetchAthlete(oid), HttpStatus.OK);
+        return new ResponseEntity<>(runService.fetchRun(oid), HttpStatus.OK);
 
     }
 
     //addUser
-    @PostMapping("athlete")
-    public ResponseEntity<AthleteDTO> saveAthlete(@RequestBody AthleteEntity athleteEntity) {
+    @PostMapping("athlete/{oid}")
+    public ResponseEntity<RunSessionDTO> saveAthleteRun(@PathVariable("oid") UUID oid, @RequestBody RunSessionEntity run) {
 
-        return new ResponseEntity<>(athleteService.saveAthlete(athleteEntity), HttpStatus.CREATED);
+        return new ResponseEntity<>(runService.saveAthleteRun(oid, run), HttpStatus.CREATED);
 
     }
 
 
     //updateUser
-    @PutMapping("athlete/{oid}")
-    public ResponseEntity<AthleteDTO> updateAthlete(@PathVariable("oid")UUID oid, @RequestBody AthleteEntity athleteEntity)
+    @PutMapping("{oid}")
+    public ResponseEntity<RunSessionDTO> updateRun(@PathVariable("oid")UUID oid, @RequestBody RunSessionEntity run)
     {
-        return new ResponseEntity<>(athleteService.updateAthlete(oid, athleteEntity), HttpStatus.OK);
+        return new ResponseEntity<>(runService.updateRun(oid, run), HttpStatus.OK);
     }
 
 
     //updateUser
     @DeleteMapping("athlete/{oid}")
-    public ResponseEntity deleteAthlete(@PathVariable("oid")UUID oid)
+    public ResponseEntity deleteRun(@PathVariable("oid")UUID oid)
     {
-        athleteService.deleteAthlete(oid);
+        runService.deleteRun(oid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

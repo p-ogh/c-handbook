@@ -1,9 +1,8 @@
 package com.pogho.theCoach.sHandbook.integration;
 
-import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
+import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.ErrorDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
+import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CoachControllerIntegrationTest {
+public class AthleteControllerIntegrationTest {
     @LocalServerPort
     private int port;
     @Autowired
@@ -25,26 +24,25 @@ public class CoachControllerIntegrationTest {
 
     @Test
     public void testPostCoach(){
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
-        ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, CoachDTO.class);
-        assertEquals(coachEntity.getFirstName(), responseEntity.getBody().getFirstName());
+        AthleteEntity athleteEntity = new AthleteEntity("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", "N/A", 19, 173, 87, "available"  );
+        ResponseEntity<AthleteDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", athleteEntity, AthleteDTO.class);
+        assertEquals(athleteEntity.getFirstName(), responseEntity.getBody().getFirstName());
     }
 
     @Test
     public void testGetCoachWithCorrectID(){
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
-        ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, CoachDTO.class);
-        ResponseEntity<CoachDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ responseEntity.getBody().getId(), CoachDTO.class);
+        AthleteEntity athleteEntity = new AthleteEntity("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", "N/A", 19, 173, 87, "available"  );
+        ResponseEntity<AthleteDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", athleteEntity, AthleteDTO.class);
+        ResponseEntity<AthleteDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/athletes/athlete/"+ responseEntity.getBody().getId(), AthleteDTO.class);
 
-
-        assertEquals(coachEntity.getFirstName(), getResponseEntity.getBody().getFirstName());
+        assertEquals(athleteEntity.getFirstName(), getResponseEntity.getBody().getFirstName());
     }
 
     @Test
     public void testGetCoachWithWrongID(){
         UUID randomUUID = UUID.randomUUID();
-        ResponseEntity<ErrorDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ randomUUID, ErrorDTO.class);
+        ResponseEntity<ErrorDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/athletes/athlete/"+ randomUUID, ErrorDTO.class);
         System.out.println(getResponseEntity.getBody());
-        assertEquals("No Coach found with ID: " + randomUUID, getResponseEntity.getBody().getMessage());
+        assertEquals("No Athlete found with ID: " + randomUUID, getResponseEntity.getBody().getMessage());
     }
 }

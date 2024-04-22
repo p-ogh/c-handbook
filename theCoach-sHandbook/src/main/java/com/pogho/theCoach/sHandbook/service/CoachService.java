@@ -3,7 +3,7 @@ package com.pogho.theCoach.sHandbook.service;
 import com.pogho.theCoach.sHandbook.DAO.Coach;
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
 import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
+import com.pogho.theCoach.sHandbook.exceptions.NoMemberFoundException;
 import com.pogho.theCoach.sHandbook.factory.CoachFactory;
 import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
@@ -38,7 +38,7 @@ public class CoachService {
             return coachDTO;
         }
         else {
-            throw new NoUserFoundException("No Coach found with ID: " + oid);
+            throw new NoMemberFoundException("No Coach found with ID: " + oid);
         }
     }
 
@@ -63,11 +63,11 @@ public class CoachService {
             coach.updateCoach(coachEntity.getFirstName(), coachEntity.getLastName(),coachEntity.getAge(), coachEntity.getGender(), coachEntity.getRole(),coachEntity.getNationality(), coachEntity.getStatus(), coachEntity.getYearsOfExperience());
             coachRepository.save(coach);
 
-            CoachDTO coachDTO =  MemberMapper.toDto(optionalCoach.get());
+            CoachDTO coachDTO =  MemberMapper.toDto(coach);
             return coachDTO;
         }
         else {
-            throw new NoUserFoundException("No Coach found with ID: " + oid);
+            throw new NoMemberFoundException("No Coach found with ID: " + oid);
         }
     }
 

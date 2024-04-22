@@ -1,17 +1,18 @@
 package com.pogho.theCoach.sHandbook.factory;
 
-import com.pogho.theCoach.sHandbook.DAO.Athlete;
-import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
-import com.pogho.theCoach.sHandbook.enums.Status;
+import com.pogho.theCoach.sHandbook.DAO.RunSession;
+import com.pogho.theCoach.sHandbook.entities.RunSessionEntity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
-public class AthleteFactory {
+public class RunSessionFactory {
 
-    public Athlete createAthlete(AthleteEntity athleteEntity) {
+    public RunSession createRun(UUID athleteId, RunSessionEntity runEntity) {
+      //  int avgSpeed = runEntity.getDistanceInKMs()/runEntity.getDurationMinutes();
 
-        Athlete athlete = new Athlete(UUID.randomUUID(), athleteEntity.getFirstName(),athleteEntity.getLastName(), athleteEntity.getAge(), athleteEntity.getGender(), athleteEntity.getRole(),athleteEntity.getNationality(), new Date(), Status.active.toString(), athleteEntity.getSport(), athleteEntity.getJerseyNumber(), athleteEntity.getHeight(), athleteEntity.getWeight(), athleteEntity.getAvailability());
-        return athlete;
+        RunSession run = new RunSession(UUID.randomUUID(), athleteId,  LocalDateTime.now(), runEntity.getScheduledDateTime(), runEntity.getActualDateTime(), runEntity.getDurationMinutes(), runEntity.getCaloriesBurned(), runEntity.getIntensityLevel(), runEntity.getMaxHeartRate(), runEntity.getTrainingFocus(), runEntity.getPerceivedEffort(), runEntity.getSessionRating(), runEntity.getSorenessLevel(), runEntity.getLocation(), runEntity.getSessionNotes(),runEntity.getDistanceInKMs(),runEntity.getEquipmentUsed(), runEntity.getKmPerLap(), runEntity.getLapsCompleted());
+        return run;
     }
 }

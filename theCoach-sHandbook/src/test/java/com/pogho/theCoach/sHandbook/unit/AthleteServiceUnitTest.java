@@ -1,9 +1,13 @@
 package com.pogho.theCoach.sHandbook.unit;
 
+import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
+import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
 import com.pogho.theCoach.sHandbook.entities.CoachEntity;
 import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
+import com.pogho.theCoach.sHandbook.repository.AthleteRepository;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
+import com.pogho.theCoach.sHandbook.service.AthleteService;
 import com.pogho.theCoach.sHandbook.service.CoachService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,29 +21,29 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class CoachServiceUnitTest {
+public class AthleteServiceUnitTest {
 
     @InjectMocks
-    public CoachService coachService;
+    public AthleteService athleteService;
 
     @Mock//Could not use @InjectMocks here because CoachRepository is an interface
-    public CoachRepository coachRepository;
+    public AthleteRepository athleteRepository;
 
     @Test
-    public void CoachCreatedWithNoNameFails() {
-        CoachEntity coachEntity = new CoachEntity("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+    public void AthleteCreatedWithNoNameFails() {
+        AthleteEntity athleteEntity = new AthleteEntity("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", "N/A", 19, 173, 87, "available"  );
         Assertions.assertThrows(NoNameException.class, () -> {
-            coachService.saveCoach(coachEntity);
+            athleteService.saveAthlete(athleteEntity);
         });
     }
 
     @Test
     public void CoachCreatedWithNamePasses() {
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
-        CoachDTO coachDTO =   coachService.saveCoach(coachEntity);
-        Assertions.assertNotNull(coachDTO.getId());
-        assertEquals(coachDTO.getFirstName(), coachEntity.getFirstName());
-        assertEquals(coachDTO.getLastName(), coachEntity.getLastName());
-        assertEquals(coachDTO.getRole(), coachEntity.getRole());
+        AthleteEntity athleteEntity = new AthleteEntity("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", "N/A", 19, 173, 87, "available"  );
+        AthleteDTO athleteDTO =   athleteService.saveAthlete(athleteEntity);
+        Assertions.assertNotNull(athleteDTO.getId());
+        assertEquals(athleteDTO.getFirstName(), athleteEntity.getFirstName());
+        assertEquals(athleteDTO.getLastName(), athleteEntity.getLastName());
+        assertEquals(athleteDTO.getRole(), athleteEntity.getRole());
     }
 }

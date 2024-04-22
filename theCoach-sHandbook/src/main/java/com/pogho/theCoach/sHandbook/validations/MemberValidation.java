@@ -6,9 +6,7 @@ import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
 public class MemberValidation {
 
     public static void validate(MemberEntity member){
-        if(member.getFirstName() == null || member.getFirstName().isEmpty()){
-            throw new NoNameException("First Name cannot be empty or null.");
-        }
+        validate(member.getFirstName());
     }
 
     public static void validate(String firstName){

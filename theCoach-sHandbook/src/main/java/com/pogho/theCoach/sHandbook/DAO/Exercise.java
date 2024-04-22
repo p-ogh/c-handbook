@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name="exercise")
-public class Exercise extends Entry{
+public class Exercise extends Record{
     private String name;
     private String type;
     private int duration;

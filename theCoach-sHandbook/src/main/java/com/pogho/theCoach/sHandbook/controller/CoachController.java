@@ -1,21 +1,12 @@
 package com.pogho.theCoach.sHandbook.controller;
 
-import com.pogho.theCoach.sHandbook.DAO.Coach;
-import com.pogho.theCoach.sHandbook.DAO.Member;
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.DTO.MemberDTO;
 import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.entities.MemberEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
-import com.pogho.theCoach.sHandbook.exceptions.NoUserFoundException;
-import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
 import com.pogho.theCoach.sHandbook.service.CoachService;
-import com.pogho.theCoach.sHandbook.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
