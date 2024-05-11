@@ -2,8 +2,8 @@ package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Athlete;
 import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
-import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoMemberFoundException;
+import com.pogho.theCoach.sHandbook.models.AthleteModel;
+import com.pogho.theCoach.sHandbook.exceptions.NotFoundException;
 import com.pogho.theCoach.sHandbook.factory.AthleteFactory;
 import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
 import com.pogho.theCoach.sHandbook.repository.AthleteRepository;
@@ -21,7 +21,7 @@ public class AthleteService {
 
     @Autowired
     private AthleteRepository athleteRepository;
-    private AthleteFactory athleteFactory = new AthleteFactory();
+    private final AthleteFactory athleteFactory = new AthleteFactory();
 
 
     public List<AthleteDTO> fetchAthletesList() {
@@ -35,39 +35,36 @@ public class AthleteService {
         Optional<Athlete> optionalAthlete = athleteRepository.findById(oid);
         //if optional user exists get user, else return not found.
         if(optionalAthlete.isPresent()){
-            AthleteDTO athleteDTO =  MemberMapper.toDto(optionalAthlete.get());
-            return athleteDTO;
+            return MemberMapper.toDto(optionalAthlete.get());
         }
         else {
-            throw new NoMemberFoundException("No Athlete found with ID: " + oid);
+            throw new NotFoundException("No Athlete found with ID: " + oid);
         }
     }
 
-    public AthleteDTO saveAthlete(AthleteEntity athleteEntity) {
-        MemberValidation.validate(athleteEntity.getFirstName());
-        Athlete athlete = athleteFactory.createAthlete(athleteEntity);
+    public AthleteDTO saveAthlete(AthleteModel athleteModel) {
+        MemberValidation.validate(athleteModel.getFirstName());
+        Athlete athlete = athleteFactory.createAthlete(athleteModel);
         athleteRepository.save(athlete);
-        AthleteDTO athleteDTO =  MemberMapper.toDto(athlete);
-        return athleteDTO;
+        return MemberMapper.toDto(athlete);
 
     }
 
-    public AthleteDTO updateAthlete(UUID oid, AthleteEntity athleteEntity) {
+    public AthleteDTO updateAthlete(UUID oid, AthleteModel athleteModel) {
 
-        MemberValidation.validate(athleteEntity.getFirstName());
+        MemberValidation.validate(athleteModel.getFirstName());
 
         Optional<Athlete> optionalAthlete = athleteRepository.findById(oid);
         if(optionalAthlete.isPresent()){
             Athlete athlete = optionalAthlete.get();
 
-            athlete.updateAthlete(athleteEntity.getFirstName(), athleteEntity.getLastName(),athleteEntity.getAge(), athleteEntity.getGender(), athleteEntity.getRole(),athleteEntity.getNationality(), athleteEntity.getStatus(), athleteEntity.getSport(), athlete.getJerseyNumber(), athleteEntity.getHeight(), athleteEntity.getWeight(), athleteEntity.getAvailability());
+            athlete.updateAthlete(athleteModel.getFirstName(), athleteModel.getLastName(),athleteModel.getAge(), athleteModel.getGender(), athleteModel.getRole(),athleteModel.getNationality(), athleteModel.getStatus(), athlete.getJerseyNumber(), athleteModel.getHeight(), athleteModel.getWeight(), athleteModel.getAvailability());
             athleteRepository.save(athlete);
 
-            AthleteDTO athleteDTO =  MemberMapper.toDto(athlete);
-            return athleteDTO;
+            return MemberMapper.toDto(athlete);
         }
         else {
-            throw new NoMemberFoundException("No Athlete found with ID: " + oid);
+            throw new NotFoundException("No Athlete found with ID: " + oid);
         }
     }
 

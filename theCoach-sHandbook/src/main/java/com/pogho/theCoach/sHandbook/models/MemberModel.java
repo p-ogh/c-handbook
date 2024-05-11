@@ -1,4 +1,4 @@
-package com.pogho.theCoach.sHandbook.entities;
+package com.pogho.theCoach.sHandbook.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberEntity {
+public class MemberModel {
     private String firstName;
     private String lastName;
     private int age;

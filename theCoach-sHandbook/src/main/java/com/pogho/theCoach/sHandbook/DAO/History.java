@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="history")
 public class History extends Record{
 
     private String medicalHistory;

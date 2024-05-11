@@ -1,17 +1,18 @@
 package com.pogho.theCoach.sHandbook.controller;
 
 import com.pogho.theCoach.sHandbook.DTO.RunSessionDTO;
-import com.pogho.theCoach.sHandbook.entities.RunSessionEntity;
+import com.pogho.theCoach.sHandbook.models.RunExerciseModel;
 import com.pogho.theCoach.sHandbook.service.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/session/run")
+@RequestMapping("/exercise/run")
 @RestController
 public class RunSessionController {
     @Autowired
@@ -43,24 +44,24 @@ public class RunSessionController {
 
     //addUser
     @PostMapping("athlete/{oid}")
-    public ResponseEntity<RunSessionDTO> saveAthleteRun(@PathVariable("oid") UUID oid, @RequestBody RunSessionEntity run) {
+    public ResponseEntity<RunSessionDTO> saveAthleteRun(@PathVariable("oid") UUID oid, @RequestBody RunExerciseModel run) {
 
         return new ResponseEntity<>(runService.saveAthleteRun(oid, run), HttpStatus.CREATED);
 
     }
 
 
-    //updateUser
-    @PutMapping("{oid}")
-    public ResponseEntity<RunSessionDTO> updateRun(@PathVariable("oid")UUID oid, @RequestBody RunSessionEntity run)
-    {
-        return new ResponseEntity<>(runService.updateRun(oid, run), HttpStatus.OK);
-    }
+//    //updateUser
+//    @PutMapping("{oid}")
+//    public ResponseEntity<RunSessionDTO> updateRun(@PathVariable("oid")UUID oid, @RequestBody RunExerciseEntity run)
+//    {
+//        return new ResponseEntity<>(runService.updateRun(oid, run), HttpStatus.OK);
+//    }
 
 
     //updateUser
     @DeleteMapping("athlete/{oid}")
-    public ResponseEntity deleteRun(@PathVariable("oid")UUID oid)
+    public ResponseEntity<HttpStatusCode> deleteRun(@PathVariable("oid")UUID oid)
     {
         runService.deleteRun(oid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

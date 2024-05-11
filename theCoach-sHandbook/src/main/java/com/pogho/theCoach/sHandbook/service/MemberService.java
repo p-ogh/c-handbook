@@ -2,10 +2,10 @@ package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Coach;
 import com.pogho.theCoach.sHandbook.DTO.MemberDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.entities.MemberEntity;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
+import com.pogho.theCoach.sHandbook.models.MemberModel;
 import com.pogho.theCoach.sHandbook.factory.CoachFactory;
-import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
+import com.pogho.theCoach.sHandbook.mapper.ModelMapper;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +17,21 @@ public class MemberService {
     @Autowired
     private CoachRepository coachRepository;
 
-    private CoachFactory coachfactory = new CoachFactory();
+    private final CoachFactory coachfactory = new CoachFactory();
+
+    @Autowired
+    private ModelMapper mapper;
+
 
     public MemberService() {
     }
 
 
-    public ResponseEntity<MemberDTO> saveMember(MemberEntity memberEntity) throws IllegalArgumentException{
-        if(memberEntity instanceof CoachEntity){
-            Coach coach = coachfactory.createCoach((CoachEntity) memberEntity);
+    public ResponseEntity<MemberDTO> saveMember(MemberModel memberModel) throws IllegalArgumentException{
+        if(memberModel instanceof CoachModel){
+            Coach coach = coachfactory.createCoach((CoachModel) memberModel);
             coachRepository.save(coach);
-            return new ResponseEntity<>(MemberMapper.toDto(coach), HttpStatus.CREATED);
+            return new ResponseEntity<>(mapper.modelToDto(coach), HttpStatus.CREATED);
         }
         else {
             throw new IllegalArgumentException("Unknown member type");

@@ -4,22 +4,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="exercise")
+@EqualsAndHashCode(callSuper = true)
 public class Exercise extends Record{
+    private UUID sessionId;
     private String name;
-    private String type;
     private int duration;
-    private int repetitions;
+    private int reps;
     private int sets;
-    private String status;
-    private boolean completed;
-    private String notes;
+
+    public Exercise(UUID id, UUID athleteId, Date created, String notes, UUID sessionId, String name, int duration, int reps, int sets) {
+        super(id, athleteId, created, notes);
+        this.sessionId = sessionId;
+        this.name = name;
+        this.duration = duration;
+        this.reps = reps;
+        this.sets = sets;
+    }
 }

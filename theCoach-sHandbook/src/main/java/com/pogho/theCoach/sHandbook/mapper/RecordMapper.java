@@ -11,8 +11,7 @@ public class RecordMapper {
 
 
     public static RunSessionDTO toDto(RunSession run){
-        RunSessionDTO runDTO = new RunSessionDTO(run.getId(), run.getAthleteId(), run.getCreated(), run.getScheduledDateTime(), run.getActualDateTime(), run.getDurationMinutes(), run.getCaloriesBurned(), run.getIntensityLevel(), run.getMaxHeartRate(), run.getTrainingFocus(), run.getPerceivedEffort(), run.getSessionRating(), run.getSorenessLevel(), run.getCompleted(), run.getLocation(), run.getSessionNotes(), run.getDistanceInKMs(), run.getEquipmentUsed(), run.getKmPerLap(), run.getLapsCompleted(), run.getAvgSpeed()  ;
-        return runDTO;
+        return new RunSessionDTO();
     }
 
 

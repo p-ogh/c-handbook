@@ -2,12 +2,14 @@ package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Coach;
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
-import com.pogho.theCoach.sHandbook.exceptions.NoMemberFoundException;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
+import com.pogho.theCoach.sHandbook.exceptions.NotFoundException;
 import com.pogho.theCoach.sHandbook.factory.CoachFactory;
-import com.pogho.theCoach.sHandbook.mapper.MemberMapper;
+import com.pogho.theCoach.sHandbook.mapper.ModelMapper;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import com.pogho.theCoach.sHandbook.validations.MemberValidation;
+import org.jetbrains.annotations.NotNull;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,18 @@ public class CoachService {
 
     @Autowired
     private CoachRepository coachRepository;
-    private CoachFactory coachFactory = new CoachFactory();
 
+    private final CoachFactory coachFactory = new CoachFactory();
+    private final ModelMapper mapper = Mappers.getMapper(ModelMapper.class);
 
+    /**
+     * Fetches the list of all the Coaches.
+     */
     public List<CoachDTO> fetchCoachsList() {
         List<Coach> coaches = coachRepository.findAll();
         List<CoachDTO> coachDTOS = new ArrayList<>();
-        coaches.forEach(coach-> coachDTOS.add(MemberMapper.toDto(coach)));
+        coaches.forEach(coach-> coachDTOS.add( mapper.modelToDto(coach)
+));
         return coachDTOS;
     }
 
@@ -34,25 +41,25 @@ public class CoachService {
         Optional<Coach> optionalCoach = coachRepository.findById(oid);
         //if optional user exists get user, else return not found.
         if(optionalCoach.isPresent()){
-            CoachDTO coachDTO =  MemberMapper.toDto(optionalCoach.get());
-            return coachDTO;
+            return mapper.modelToDto(optionalCoach.get());
         }
         else {
-            throw new NoMemberFoundException("No Coach found with ID: " + oid);
+            throw new NotFoundException("No Coach found with ID: " + oid);
         }
     }
 
-    public CoachDTO saveCoach(CoachEntity coachEntity) {
+    public CoachDTO saveCoach(@NotNull CoachModel coachEntity) {
         //go to coachfactory, verify property firstname exists,create coach, return coach, save coach in repository,return coachdto
         MemberValidation.validate(coachEntity.getFirstName());
         Coach coach = coachFactory.createCoach(coachEntity);
         coachRepository.save(coach);
-        CoachDTO coachDTO =  MemberMapper.toDto(coach);
-        return coachDTO;
+
+        return mapper.modelToDto(coach);
+
 
     }
 
-    public CoachDTO updateCoach(UUID oid, CoachEntity coachEntity) {
+    public CoachDTO updateCoach(UUID oid, @NotNull CoachModel coachEntity) {
 
         MemberValidation.validate(coachEntity.getFirstName());
 
@@ -63,11 +70,10 @@ public class CoachService {
             coach.updateCoach(coachEntity.getFirstName(), coachEntity.getLastName(),coachEntity.getAge(), coachEntity.getGender(), coachEntity.getRole(),coachEntity.getNationality(), coachEntity.getStatus(), coachEntity.getYearsOfExperience());
             coachRepository.save(coach);
 
-            CoachDTO coachDTO =  MemberMapper.toDto(coach);
-            return coachDTO;
+            return mapper.modelToDto(coach);
         }
         else {
-            throw new NoMemberFoundException("No Coach found with ID: " + oid);
+            throw new NotFoundException("No Coach found with ID: " + oid);
         }
     }
 

@@ -127,10 +127,10 @@ function Dashboard() {
 
 
 
-            <div className="card-list">
+            <div className="container" style={{marginTop:50,}}>
                 {teamData.length ===0 ? (
                 <Team caption ='No Teams to display'/> ) : (
-                <div>
+                <div className="row">
                     {teamData.map((team) =>(<Team key={team.id} data ={team}/>))}
                 </div>
                 )

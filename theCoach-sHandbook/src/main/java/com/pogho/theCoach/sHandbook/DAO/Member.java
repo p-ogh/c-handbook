@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public abstract class Member implements Serializable {
+public abstract class Member {
     @Id
     private UUID id;
     @Column(name = "first_name")
@@ -28,7 +28,13 @@ public abstract class Member implements Serializable {
     @Column(name = "date_added")
     private Date dateAdded;
     private String status;
-    //private Date dateOfBirth;
+
+    public Member(UUID id, String firstName, String lastName, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+
+    }
 
     public void updateMember(String firstName, String lastName, int age, String gender, String role, String nationality, String status) {
         this.firstName = firstName;

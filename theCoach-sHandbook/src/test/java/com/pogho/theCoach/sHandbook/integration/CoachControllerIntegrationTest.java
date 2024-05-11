@@ -2,7 +2,7 @@ package com.pogho.theCoach.sHandbook.integration;
 
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
 import com.pogho.theCoach.sHandbook.DTO.ErrorDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,19 +24,19 @@ public class CoachControllerIntegrationTest {
 
     @Test
     public void testPostCoach(){
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        CoachModel coachEntity = new CoachModel("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
         ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, CoachDTO.class);
         assertEquals(coachEntity.getFirstName(), responseEntity.getBody().getFirstName());
     }
 
     @Test
     public void testGetCoachWithCorrectID(){
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
-        ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, CoachDTO.class);
+        CoachModel coachModel = new CoachModel("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachModel, CoachDTO.class);
         ResponseEntity<CoachDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ responseEntity.getBody().getId(), CoachDTO.class);
 
 
-        assertEquals(coachEntity.getFirstName(), getResponseEntity.getBody().getFirstName());
+        assertEquals(coachModel.getFirstName(), getResponseEntity.getBody().getFirstName());
     }
 
     @Test

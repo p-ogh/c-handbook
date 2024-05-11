@@ -14,4 +14,6 @@ public class RecordDTO {
     private UUID id;
     private UUID athleteId;
     private LocalDateTime created;
+    private String notes;
+
 }

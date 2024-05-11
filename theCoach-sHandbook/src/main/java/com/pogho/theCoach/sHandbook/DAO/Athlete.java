@@ -14,16 +14,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 public class Athlete  extends Member{
-    private String sport;
     @Column(name="jersey_number")
     private int jerseyNumber;
     private double height;
     private double weight;
     private String availability;
 
-    public Athlete(UUID id, String firstName, String lastName, int age, String gender, String role, String nationality, Date date, String status, String sport, int jerseyNumber, double height, double weight, String availability) {
+    public Athlete(UUID id, String firstName, String lastName, int age, String gender, String role, String nationality, Date date, String status, int jerseyNumber, double height, double weight, String availability) {
         super(id, firstName, lastName, age, gender, role, nationality, date, status);
-        this.sport = sport;
         this.jerseyNumber = jerseyNumber;
         this.height = height;
         this.weight = weight;
@@ -31,9 +29,8 @@ public class Athlete  extends Member{
     }
 
 
-    public void updateAthlete(String firstName, String lastName, int age, String gender, String role, String nationality, String status, String sport, int jerseyNumber, double height, double weight, String availability) {
+    public void updateAthlete(String firstName, String lastName, int age, String gender, String role, String nationality, String status, int jerseyNumber, double height, double weight, String availability) {
         super.updateMember(firstName, lastName, age, gender, role, nationality,status);
-        this.sport = sport;
         this.jerseyNumber =jerseyNumber;
         this.height =height;
         this.weight =weight;

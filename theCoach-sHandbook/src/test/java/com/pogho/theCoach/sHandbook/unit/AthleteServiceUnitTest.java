@@ -1,14 +1,10 @@
 package com.pogho.theCoach.sHandbook.unit;
 
 import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
-import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.entities.AthleteEntity;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
+import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
 import com.pogho.theCoach.sHandbook.repository.AthleteRepository;
-import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import com.pogho.theCoach.sHandbook.service.AthleteService;
-import com.pogho.theCoach.sHandbook.service.CoachService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,15 +27,15 @@ public class AthleteServiceUnitTest {
 
     @Test
     public void AthleteCreatedWithNoNameFails() {
-        AthleteEntity athleteEntity = new AthleteEntity("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", "N/A", 19, 173, 87, "available"  );
+        AthleteModel athleteEntity = new AthleteModel("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 19, 173, 87, "available"  );
         Assertions.assertThrows(NoNameException.class, () -> {
             athleteService.saveAthlete(athleteEntity);
         });
     }
 
     @Test
-    public void CoachCreatedWithNamePasses() {
-        AthleteEntity athleteEntity = new AthleteEntity("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", "N/A", 19, 173, 87, "available"  );
+    public void AthleteCreatedWithNamePasses() {
+        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", 19, 173, 87, "available"  );
         AthleteDTO athleteDTO =   athleteService.saveAthlete(athleteEntity);
         Assertions.assertNotNull(athleteDTO.getId());
         assertEquals(athleteDTO.getFirstName(), athleteEntity.getFirstName());

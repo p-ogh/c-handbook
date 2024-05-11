@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="fitnessStats")
 public class FitnessStats extends Record {
 
     private double weight;

@@ -1,7 +1,17 @@
+import Header from '../components/Header.jsx'
+import Dashboard from '../components/Dashboard.jsx'
+import Footer from '../components/Footer.jsx'
 
-function TeamDashboard(){
-    return <h2> Dashboard</h2>
+
+function Home(){
+    return(
+        <>
+            <Header/>
+            <Dashboard/>
+            <Footer/>
+        </>
+        )
 
     }
 
-export default TeamDashboard
+export default Home

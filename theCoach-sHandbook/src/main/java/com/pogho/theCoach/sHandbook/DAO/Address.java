@@ -13,9 +13,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="address")
-public class Address implements Serializable {
+public class Address {
 
     @Id
     private  UUID id;

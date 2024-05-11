@@ -1,6 +1,8 @@
- import arsenalLogo from './assets/arsenalLogo.png';
- import TeamDashboard from "./pages/TeamDashboard.jsx";
- import Home from "./pages/Home.jsx";
+ import arsenalLogo from '../assets/arsenalLogo.png';
+ import { Routes, Route, Link } from 'react-router-dom'
+ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -11,27 +13,27 @@ function Team({data, caption}) {
         <>
 
 
-        <div className="card">
+        <div className="col-md-3 mb-3">
 
         <div>
             {data ? (
-                <div className="card-body">
-                    <div>
+                <div className="card-sl">
+                    <div className="card-image">
                         <img className="logo" src={arsenalLogo} alt="logo" width="100" height="100"/>
                     </div>
 
-                    <div className="details">
-                        <h3 className="card-title"> {data.name}</h3>
-                        <p className="card-text"> {data.sport}</p>
-                        <p className="card-text"> {data.season}</p>
-                        <p className="card-text"> {data.status}</p>
-                    </div>
-                    <Link to={`/team`}>View Team</Link>
+                    <a className="card-action" href="#"><FontAwesomeIcon icon={faCircleCheck} /></a>
+
+                        <div className="card-heading">{data.name}</div>
+                        <div className="card-text">{data.sport}</div>
+                        <div className="card-text"> {data.status}</div>
+                    <Link className="card-button" to={`/team`}>View Team</Link>
 
 
                 </div>
                 ) : (
-                  <p className="card-text"> {caption}</p>
+                  <div className="card-text">{caption}</div>
+
 
                     )}
         </div>

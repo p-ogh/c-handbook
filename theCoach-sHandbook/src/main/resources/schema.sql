@@ -1,64 +1,80 @@
-DROP TABLE IF EXISTS member;
+--DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS coach;
-DROP TABLE IF EXISTS run_session;
+DROP TABLE IF EXISTS exercise;
+DROP TABLE IF EXISTS session_table;
 DROP TABLE IF EXISTS athlete;
+DROP TABLE IF EXISTS team;
+
 
 
 --CREATE DATABASE handbook;
 --USE handbook;
 --
-CREATE TABLE coach (
-  id binary(16) PRIMARY KEY,
+CREATE TABLE coach(
+  id uuid PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  age SMALLINT(6) NOT NULL,
+  age SMALLINT NOT NULL,
   gender VARCHAR(3) NOT NULL,
   role VARCHAR(50) NOT NULL,
   nationality VARCHAR(50) NOT NULL,
-  date_added date NOT NULL,
+  date_added DATE NOT NULL,
   status VARCHAR(10) NOT NULL,
-  years_of_experience SMALLINT(6) NOT NULL
+  years_of_experience SMALLINT NOT NULL);
 
-);
-CREATE TABLE athlete (
-  id binary(16) PRIMARY KEY,
+CREATE TABLE athlete(
+  id uuid PRIMARY KEY,
  first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  age SMALLINT(6) NOT NULL,
+  age SMALLINT NOT NULL,
   gender VARCHAR(3) NOT NULL,
   role VARCHAR(50) NOT NULL,
   nationality VARCHAR(50) NOT NULL,
-  date_added date NOT NULL,
+  date_added DATE NOT NULL,
   status VARCHAR(10) NOT NULL,
-  sport VARCHAR(50) NOT NULL,
   jersey_number VARCHAR(50) NOT NULL,
-  height DOUBLE(5,2) NOT NULL,
-  weight DOUBLE(5,2) NOT NULL,
+  height DOUBLE PRECISION NOT NULL,
+  weight DOUBLE PRECISION NOT NULL,
   availability VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE run_session (
-  id binary(16) PRIMARY KEY,
-  athlete_id binary(16) NOT NULL,
-  created date NOT NULL,
-  scheduled_date_time date NOT NULL,
-  actual_date_time date NOT NULL,
-  duration_minutes int(10) NOT NULL,
-  calories_burned int(10) NOT NULL,
-  intensity_level VARCHAR(6) NOT NULL,
-  max_heart_rate int(3) NOT NULL,
-  training_focus VARCHAR(50) NOT NULL,
-  perceived_effort int(3) NOT NULL,
-  session_rating int NOT NULL,
-  soreness_level int(3) NOT NULL,
-  completed TINYINT NOT NULL,
+
+CREATE TABLE session_table(
+  id uuid PRIMARY KEY,
+  athlete_id uuid NOT NULL,
+  created DATE NOT NULL,
+  notes VARCHAR,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
+  duration INT NOT NULL,
+  max_heart_rate INT NOT NULL,
+  calories_burned INT NOT NULL,
+  rating SMALLINT NOT NULL,
+  soreness_level SMALLINT NOT NULL,
   location VARCHAR(50) NOT NULL,
-  session_notes VARCHAR(100) NOT NULL,
-  distance_kms int(3) NOT NULL,
-  equipment_used VARCHAR(10) NOT NULL,
-  km_per_lap int(3) NOT NULL,
-  laps_completed int(3) NOT NULL,
-  avg_speed DOUBLE(3,2) NOT NULL,
   FOREIGN KEY (athlete_id) REFERENCES athlete(id)
+);
+
+CREATE TABLE exercise(
+  id uuid PRIMARY KEY,
+  athlete_id uuid NOT NULL,
+  created DATE NOT NULL,
+  notes VARCHAR,
+  session_id uuid NOT NULL,
+  name VARCHAR NOT NULL,
+  duration INT NOT NULL,
+  reps INT NOT NULL,
+  sets INT NOT NULL,
+  FOREIGN KEY (athlete_id) REFERENCES athlete(id),
+  FOREIGN KEY (session_id) REFERENCES session_table(id)
+);
+
+CREATE TABLE team(
+  id uuid PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  sport VARCHAR NOT NULL,
+  status VARCHAR NOT NULL,
+  created DATE NOT NULL
+
 );
 

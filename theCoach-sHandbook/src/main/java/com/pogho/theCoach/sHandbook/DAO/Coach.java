@@ -4,11 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +22,11 @@ public class Coach extends Member{
         super(id, firstName,lastName,age, gender,role,nationality,date,status);
         this.yearsOfExperience = yearsOfExperience;
     }
+//
+//    public Coach(UUID id, String firstName, String lastName, String role) {
+//        super(id, firstName,lastName,role);
+//
+//    }
 
     public void updateCoach(String firstName, String lastName, int age, String gender, String role, String nationality, String status, int yearsOfExperience) {
     super.updateMember(firstName, lastName, age, gender, role, nationality,status);

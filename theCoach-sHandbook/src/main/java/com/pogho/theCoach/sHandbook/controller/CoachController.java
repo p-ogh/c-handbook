@@ -1,7 +1,7 @@
 package com.pogho.theCoach.sHandbook.controller;
 
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
 import com.pogho.theCoach.sHandbook.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class CoachController {
 
     //addUser
     @PostMapping("coach")
-    public ResponseEntity<CoachDTO> saveCoach(@RequestBody CoachEntity coachEntity) {
+    public ResponseEntity<CoachDTO> saveCoach(@RequestBody CoachModel coachEntity) {
 
         return new ResponseEntity<>(coachService.saveCoach(coachEntity), HttpStatus.CREATED);
 
@@ -44,7 +44,7 @@ public class CoachController {
 
     //updateUser
     @PutMapping("coach/{oid}")
-    public ResponseEntity<CoachDTO> updateCoach(@PathVariable("oid")UUID oid, @RequestBody CoachEntity coachEntity)
+    public ResponseEntity<CoachDTO> updateCoach(@PathVariable("oid")UUID oid, @RequestBody CoachModel coachEntity)
     {
         return new ResponseEntity<>(coachService.updateCoach(oid, coachEntity), HttpStatus.OK);
     }

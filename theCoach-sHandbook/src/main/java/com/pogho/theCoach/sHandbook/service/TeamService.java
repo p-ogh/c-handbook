@@ -19,6 +19,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -98,8 +99,9 @@ public class TeamService {
 
     public List<AthleteDTO> fetchTeamAthletes(UUID teamId) {
 
-        List<Athlete> athletes = athleteRepository.findByTeamID(teamId);
-        return athletes.stream().map(mapper::modelToDto).toList();
+//        List<Athlete> athletes = athleteRepository.findByTeamID(teamId);
+//        return athletes.stream().map(mapper::modelToDto).toList();
+        return new ArrayList<>();
 
     }
 

@@ -1,7 +1,7 @@
 package com.pogho.theCoach.sHandbook.unit;
 
 import com.pogho.theCoach.sHandbook.DTO.CoachDTO;
-import com.pogho.theCoach.sHandbook.entities.CoachEntity;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
 import com.pogho.theCoach.sHandbook.exceptions.NoNameException;
 import com.pogho.theCoach.sHandbook.repository.CoachRepository;
 import com.pogho.theCoach.sHandbook.service.CoachService;
@@ -25,9 +25,11 @@ public class CoachServiceUnitTest {
     @Mock//Could not use @InjectMocks here because CoachRepository is an interface
     public CoachRepository coachRepository;
 
+
+
     @Test
     public void CoachCreatedWithNoNameFails() {
-        CoachEntity coachEntity = new CoachEntity("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        CoachModel coachEntity = new CoachModel("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
         Assertions.assertThrows(NoNameException.class, () -> {
             coachService.saveCoach(coachEntity);
         });
@@ -35,11 +37,11 @@ public class CoachServiceUnitTest {
 
     @Test
     public void CoachCreatedWithNamePasses() {
-        CoachEntity coachEntity = new CoachEntity("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
-        CoachDTO coachDTO =   coachService.saveCoach(coachEntity);
+        CoachModel coachModel = new CoachModel("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        CoachDTO coachDTO =   coachService.saveCoach(coachModel);
         Assertions.assertNotNull(coachDTO.getId());
-        assertEquals(coachDTO.getFirstName(), coachEntity.getFirstName());
-        assertEquals(coachDTO.getLastName(), coachEntity.getLastName());
-        assertEquals(coachDTO.getRole(), coachEntity.getRole());
+        assertEquals(coachDTO.getFirstName(), coachModel.getFirstName());
+        assertEquals(coachDTO.getLastName(), coachModel.getLastName());
+        assertEquals(coachDTO.getRole(), coachModel.getRole());
     }
 }

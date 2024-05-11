@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -19,5 +19,11 @@ public abstract class Record {
     private UUID id;
     private UUID athleteId;
     @CreatedDate
-    private LocalDateTime created;
+    private Date created;
+    private String notes;
+
+
+    protected void update(String notes) {
+         this.notes = notes;
+    }
 }

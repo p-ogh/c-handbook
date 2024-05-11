@@ -12,8 +12,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="contactDetail")
 public class ContactDetails {
     @Id
     private UUID id;
