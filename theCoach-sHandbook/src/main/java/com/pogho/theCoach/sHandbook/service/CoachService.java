@@ -48,10 +48,10 @@ public class CoachService {
         }
     }
 
-    public CoachDTO saveCoach(@NotNull CoachModel coachEntity) {
+    public CoachDTO saveCoach(@NotNull CoachModel model) {
         //go to coachfactory, verify property firstname exists,create coach, return coach, save coach in repository,return coachdto
-        MemberValidation.validate(coachEntity.getFirstName());
-        Coach coach = coachFactory.createCoach(coachEntity);
+        MemberValidation.validate(model.getFirstName());
+        Coach coach = coachFactory.createCoach(model);
         coachRepository.save(coach);
 
         return mapper.modelToDto(coach);
@@ -59,15 +59,15 @@ public class CoachService {
 
     }
 
-    public CoachDTO updateCoach(UUID oid, @NotNull CoachModel coachEntity) {
+    public CoachDTO updateCoach(UUID oid, @NotNull CoachModel model) {
 
-        MemberValidation.validate(coachEntity.getFirstName());
+        MemberValidation.validate(model.getFirstName());
 
         Optional<Coach> optionalCoach = coachRepository.findById(oid);
         if(optionalCoach.isPresent()){
             Coach coach = optionalCoach.get();
 
-            coach.updateCoach(coachEntity.getFirstName(), coachEntity.getLastName(),coachEntity.getAge(), coachEntity.getGender(), coachEntity.getRole(),coachEntity.getNationality(), coachEntity.getStatus(), coachEntity.getYearsOfExperience());
+            coach.updateCoach(model.getFirstName(), model.getLastName(), model.getTeamID(), model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), model.getStatus(), model.getYearsOfExperience());
             coachRepository.save(coach);
 
             return mapper.modelToDto(coach);

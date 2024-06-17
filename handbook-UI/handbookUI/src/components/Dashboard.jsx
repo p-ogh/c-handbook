@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
 import Team from './Team.jsx'
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import Container from 'react-bootstrap/Container';
+import { faShieldHalved } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -49,7 +56,7 @@ function Dashboard() {
 
        async function postData() {
         try{
-            const response = await fetch('http://localhost:8181/teams/new', {
+            const response = await fetch('http://localhost:8181/teams/team', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,62 +88,74 @@ function Dashboard() {
 
 
     return (
-        <div>
-
-            <div className= "cardButtons">
-                <button  type="button" className="btn btn-light" onClick={handleAddTeam}>Add New Team</button>
-                <button type="button" className="btn btn-light" onClick={handleDeleteTeam}>Delete Team</button>
-            </div>
-
-                <div className={showForm ? "modal fade show" : "modal fade"} tabIndex="-1" role="dialog" style={style}>
-                  <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-
-                      <div className="modal-header">
-                        <h5 className="modal-title" id="modalTitle">Add New Team</h5>
-                        <button type="button" className="btn" onClick={handleClose} aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div className="modal-body">
-                          <form>
-                              <div className="form-group">
-                                  <label htmlFor="teamName">Team Name</label>
-                                  <input type="text" className="form-control" id="teamName" aria-describedby="teamNameHelp"  value ={teamName} onChange={(e) => setTeamName(e.target.value)}  placeholder="Enter team name"/>
-                                  <small id="teamNameHelp" className="form-text text-muted">Use a unique name.</small>
-                              </div>
-                              <div className="form-group">
-                                  <label htmlFor="sportType">Sport</label>
-                                  <input type="text" className="form-control" id="sportType" value ={sport} onChange={(e) => setSport(e.target.value)} placeholder="Sport type..."/>
-                              </div>
-                              <div className="form-check">
-                                  <input type="checkbox" className="form-check-input" id="activeTeam"/>
-                                  <label className="form-check-label" htmlFor="activeTeam">Active</label>
-                              </div>
-                          </form>
-                      </div>
-                      <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={handleClose} >Close</button>
-                        <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
-                      </div>
-
+        <>
+            <div className="dashContainer col-md-10 bg-body-tertiary">
+                 <div className="teamListHeader">
+                     <div className="teamTitle">
+                         <div className="team-title-icon">
+                             <FontAwesomeIcon icon={faShieldHalved} style={{color: "#74C0FC",}} />
+                         </div>
+                         <div className="teamDescription">
+                            <h5 className="text-uppercase">Team Dashboard</h5>
+                            <p>Dashboard for all teams</p>
+                        </div>
                     </div>
-                  </div>
+                    <div className= "cardButtons">
+                        <Button className="mr-3" variant="primary" type="button" onClick={handleAddTeam}><FontAwesomeIcon icon={faSquarePlus}/>{" "}Add New Team</Button>{" "}
+                        <Button variant="primary" type="button" onClick={handleDeleteTeam}><FontAwesomeIcon icon={faTrashCan} />{" "}Delete Team</Button>
+                    </div>
+                </div>
+                <div className="teamCards">
+                    {teamData.length ===0 ? (
+                    <Team caption='No Teams to display'/> ) : (
+                        <div className="row">
+                            {teamData.map( (team) =>(
+                                <Team key={team.id} data ={team}/>
+                                )
+                                ) }
+                        </div>
+                        )
+                    }
                 </div>
 
-
-
-
-            <div className="container" style={{marginTop:50,}}>
-                {teamData.length ===0 ? (
-                <Team caption ='No Teams to display'/> ) : (
-                <div className="row">
-                    {teamData.map((team) =>(<Team key={team.id} data ={team}/>))}
-                </div>
-                )
-                }
             </div>
-        </div>
+
+           <div className={showForm ? "modal fade show" : "modal fade"} tabIndex="-1" role="dialog" style={style}>
+                          <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+
+                              <div className="modal-header">
+                                <h5 className="modal-title" id="modalTitle">Add New Team</h5>
+                                <button type="button" className="btn" onClick={handleClose} aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div className="modal-body">
+                                  <form>
+                                      <div className="form-group">
+                                          <label htmlFor="teamName">Team Name</label>
+                                          <input type="text" className="form-control" id="teamName" aria-describedby="teamNameHelp"  value ={teamName} onChange={(e) => setTeamName(e.target.value)}  placeholder="Enter team name"/>
+                                          <small id="teamNameHelp" className="form-text text-muted">Use a unique name.</small>
+                                      </div>
+                                      <div className="form-group">
+                                          <label htmlFor="sportType">Sport</label>
+                                          <input type="text" className="form-control" id="sportType" value ={sport} onChange={(e) => setSport(e.target.value)} placeholder="Sport type..."/>
+                                      </div>
+                                      <div className="form-check">
+                                          <input type="checkbox" className="form-check-input" id="activeTeam"/>
+                                          <label className="form-check-label" htmlFor="activeTeam">Active</label>
+                                      </div>
+                                  </form>
+                              </div>
+                              <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={handleClose} >Close</button>
+                                <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+</>
 
     )
 }

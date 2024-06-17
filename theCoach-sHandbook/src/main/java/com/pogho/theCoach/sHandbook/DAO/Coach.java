@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,18 +19,13 @@ import java.util.UUID;
 public class Coach extends Member{
     private int yearsOfExperience;
 
-    public Coach(UUID id, String firstName, String lastName, int age, String gender, String role, String nationality, Date date, String status, int yearsOfExperience) {
-        super(id, firstName,lastName,age, gender,role,nationality,date,status);
+    public Coach(UUID id, String firstName, String lastName, UUID teamID, int age, String gender, String role, List<UUID> seasons, Date date, String status, int yearsOfExperience) {
+        super(id, firstName,lastName, teamID, age, gender,role,seasons,date,status);
         this.yearsOfExperience = yearsOfExperience;
     }
-//
-//    public Coach(UUID id, String firstName, String lastName, String role) {
-//        super(id, firstName,lastName,role);
-//
-//    }
 
-    public void updateCoach(String firstName, String lastName, int age, String gender, String role, String nationality, String status, int yearsOfExperience) {
-    super.updateMember(firstName, lastName, age, gender, role, nationality,status);
+    public void updateCoach(String firstName, String lastName,UUID teamID, int age, String gender, String role, List<UUID> seasons, String status, int yearsOfExperience) {
+    super.updateMember(firstName, lastName,teamID, age, gender, role, seasons,status);
     this.yearsOfExperience = yearsOfExperience;
 
     }

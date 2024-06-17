@@ -2,8 +2,7 @@
  import { Routes, Route, Link } from 'react-router-dom'
  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
  import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
-
-
+ import Card from 'react-bootstrap/Card';
 
 
 
@@ -15,28 +14,30 @@ function Team({data, caption}) {
 
         <div className="col-md-3 mb-3">
 
-        <div>
+        <Card>
             {data ? (
-                <div className="card-sl">
-                    <div className="card-image">
-                        <img className="logo" src={arsenalLogo} alt="logo" width="100" height="100"/>
-                    </div>
+                <>
+                 <div className="card-sl">
 
-                    <a className="card-action" href="#"><FontAwesomeIcon icon={faCircleCheck} /></a>
+                    <Card.Img variant="top" src={arsenalLogo}/>
 
-                        <div className="card-heading">{data.name}</div>
-                        <div className="card-text">{data.sport}</div>
-                        <div className="card-text"> {data.status}</div>
-                    <Link className="card-button" to={`/team`}>View Team</Link>
+                    <Link className="card-action" to={`/#`}><FontAwesomeIcon  className="fa-xl" icon={faCircleCheck} /></Link>
+
+                    <Card.Body>
+                        <Card.Title>{data.name}</Card.Title>
+                        <Card.Text>{data.sport}</Card.Text>
+                        <Card.Text>{data.status}</Card.Text>
+                    </Card.Body>
+                    <Link className="card-button" to={`/team`} state={{ id: data.id }}>View Team</Link>
+                     </div>
 
 
-                </div>
+
+                </>
                 ) : (
-                  <div className="card-text">{caption}</div>
-
-
+                    <Card.Text>{caption}</Card.Text>
                     )}
-        </div>
+        </Card>
         </div>
         </>
 

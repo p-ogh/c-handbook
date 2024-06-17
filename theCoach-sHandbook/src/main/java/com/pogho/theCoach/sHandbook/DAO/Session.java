@@ -13,48 +13,32 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "session_table")
 public class Session extends Record{
-    @Column(name = "start_time")
-    private LocalDateTime startTime;
-    @Column(name = "end_time")
-    private LocalDateTime endTime;
-//    @Column(name = "exercises")
-//    private List<Exercise> exercises;// running, strength training, cycling, yoga
-    @Column(name = "duration")
-    private long duration;
-    @Column(name = "max_heart_rate")
-    private int maxHeartRate;
-    @Column(name = "calories_burned")
-    private int caloriesBurned;
-    @Column(name = "rating")
-    private int rating;
-    @Column(name = "soreness_level")
-    private int sorenessLevel;
-    private String location;
+    private LocalDateTime start;
 
-    public Session(UUID id, UUID athleteId, Date created, String notes, LocalDateTime startTime, LocalDateTime endTime, long duration, int maxHeartRate, int caloriesBurned, int rating, int sorenessLevel, String location) {
-        super(id, athleteId, created, notes);
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.duration = duration;
-        this.maxHeartRate = maxHeartRate;
-        this.caloriesBurned = caloriesBurned;
-        this.rating = rating;
-        this.sorenessLevel = sorenessLevel;
+    @Column(name = "end_time")
+    private LocalDateTime end;
+    private long duration;
+    private int rating;
+    private String location;
+    private String status; //status could be new, active, completed
+
+    public Session(UUID id, Date created, UUID teamId, String notes, String location) {
+        super(id, created, teamId, notes);
         this.location = location;
     }
 
-    protected void updateSession(String notes, LocalDateTime start, LocalDateTime end, int duration, int maxHeartRate, int caloriesBurned, int rating, int sorenessLevel, String location) {
+    protected void updateSession(String notes, LocalDateTime start, LocalDateTime end, long duration, int rating, String location, String status) {
     super.update(notes);
-        this.startTime = start;
-        this.endTime = end;
+        this.start = start;
+        this.end= end;
         this.duration = duration;
-        this.maxHeartRate = maxHeartRate;
-        this.caloriesBurned = caloriesBurned;
         this.rating = rating;
-        this.sorenessLevel = sorenessLevel;
-        this.location = location;  }
+        this.location = location;
+        this.status = status;
+    }
 }

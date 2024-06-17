@@ -16,13 +16,20 @@ import java.util.UUID;
 @RestController
 public class AthleteController {
     @Autowired
-    private AthleteService athleteService;
+    private AthleteService service;
 
     //getUsers
     @GetMapping("all")
     public ResponseEntity<List<AthleteDTO>> fetchAthletesList()
     {
-        return new ResponseEntity<>(athleteService.fetchAthletesList(), HttpStatus.OK);
+        return new ResponseEntity<>(service.fetchAthletesList(), HttpStatus.OK);
+
+    }
+    //getUsers
+    @GetMapping("teamID/{id}/athlete")
+    public ResponseEntity<List<AthleteDTO>> fetchTeamAthletes(@PathVariable("id") UUID id)
+    {
+        return new ResponseEntity<>(service.fetchTeamAthletes(id), HttpStatus.OK);
 
     }
 
@@ -30,7 +37,7 @@ public class AthleteController {
     @GetMapping("athlete/{oid}")
     public ResponseEntity<AthleteDTO> fetchAthlete(@PathVariable("oid") UUID oid)
     {
-        return new ResponseEntity<>(athleteService.fetchAthlete(oid), HttpStatus.OK);
+        return new ResponseEntity<>(service.fetchAthlete(oid), HttpStatus.OK);
 
     }
 
@@ -38,7 +45,7 @@ public class AthleteController {
     @PostMapping("athlete")
     public ResponseEntity<AthleteDTO> saveAthlete(@RequestBody AthleteModel athleteEntity) {
 
-        return new ResponseEntity<>(athleteService.saveAthlete(athleteEntity), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.saveAthlete(athleteEntity), HttpStatus.CREATED);
 
     }
 
@@ -47,7 +54,7 @@ public class AthleteController {
     @PutMapping("athlete/{oid}")
     public ResponseEntity<AthleteDTO> updateAthlete(@PathVariable("oid")UUID oid, @RequestBody AthleteModel athleteEntity)
     {
-        return new ResponseEntity<>(athleteService.updateAthlete(oid, athleteEntity), HttpStatus.OK);
+        return new ResponseEntity<>(service.updateAthlete(oid, athleteEntity), HttpStatus.OK);
     }
 
 
@@ -55,7 +62,7 @@ public class AthleteController {
     @DeleteMapping("athlete/{oid}")
     public ResponseEntity<HttpStatusCode> deleteAthlete(@PathVariable("oid")UUID oid)
     {
-        athleteService.deleteAthlete(oid);
+        service.deleteAthlete(oid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,38 +1,28 @@
 package com.pogho.theCoach.sHandbook.DTO;
 
-import com.pogho.theCoach.sHandbook.enums.IntensityLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SessionDTO extends RecordDTO{
     private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime end; //can be null
     private int duration;
-    private int caloriesBurned;
-    private IntensityLevel intensityLevel; //low,medium,high
-    private int maxHeartRate;
-  //  private String trainingFocus; //endurance, strength, flexibility, weightloss, speed, recovery, competition,
     private int rating;
-    private int sorenessLevel;
     private String location;
+    private boolean teamSession;
 
-    public SessionDTO(UUID id, UUID athleteId, LocalDateTime created, String notes, LocalDateTime start, LocalDateTime end, int duration, int caloriesBurned, IntensityLevel intensityLevel, int maxHeartRate, int rating, int sorenessLevel, String location) {
-        super(id, athleteId, created, notes);
-        this.start = start;
-        this.end = end;
-        this.duration = duration;
-        this.caloriesBurned = caloriesBurned;
-        this.intensityLevel = intensityLevel;
-        this.maxHeartRate = maxHeartRate;
-        this.rating = rating;
-        this.sorenessLevel = sorenessLevel;
+    public SessionDTO(UUID id, LocalDateTime created, String notes, boolean teamSession, String location) {
+        super(id, created, notes);
+        this.teamSession = teamSession;
         this.location = location;
     }
 }

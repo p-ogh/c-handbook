@@ -2,7 +2,6 @@ package com.pogho.theCoach.sHandbook.DAO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +21,12 @@ public class Team {
     private String sport;
     private String status;
     private Date created;
+    private List<UUID> seasons;
 
-    public void updateTeam(String name, String sport) {
+
+    public void updateTeam(String name, String sport, List<UUID> seasons) {
         this.name = name;
         this.sport = sport;
+        this.seasons = seasons;
     }
 }

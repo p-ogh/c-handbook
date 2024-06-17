@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -12,10 +14,11 @@ import java.util.Date;
 public class MemberModel {
     private String firstName;
     private String lastName;
+    private UUID teamID;
     private int age;
     private String gender;
     private String role;
-    private String nationality;
+    private List<UUID> seasons;
     private Date dateAdded;
     private String status;
 }

@@ -28,35 +28,29 @@ public class TeamController {
         return new ResponseEntity<>(service.fetchTeamsList(), HttpStatus.OK);
     }
 
-    @PostMapping("new")
+    @PostMapping("team")
     public ResponseEntity<TeamDTO> addTeam(@RequestBody TeamModel model)
     {
         return new ResponseEntity<>(service.addTeam(model), HttpStatus.CREATED);
     }
 
-    //getUsers
-    @GetMapping("team/{id}/athlete")
-    public ResponseEntity<List<AthleteDTO>> fetchTeamAthletes(@PathVariable("id") UUID id)
-    {
-        return new ResponseEntity<>(service.fetchTeamAthletes(id), HttpStatus.OK);
 
-    }
 
     //getUser
-    @GetMapping("{id}")
+    @GetMapping("team/{id}")
     public ResponseEntity<TeamDTO> fetchTeam(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeam(id), HttpStatus.OK);
 
     }
 
-    //addUser
-    @PostMapping("team/{oid}/athlete")
-    public ResponseEntity<AthleteDTO> saveAthlete(@PathVariable("id") UUID oid, @RequestBody AthleteModel model) {
-
-        return new ResponseEntity<>(service.saveAthlete(oid, model), HttpStatus.CREATED);
-
-    }
+//    //addUser
+//    @PostMapping("teamID/{oid}/athlete")
+//    public ResponseEntity<AthleteDTO> saveAthlete(@PathVariable("id") UUID oid, @RequestBody AthleteModel model) {
+//
+//        return new ResponseEntity<>(service.saveAthlete(oid, model), HttpStatus.CREATED);
+//
+//    }
 
 
     //updateTeam
@@ -68,7 +62,7 @@ public class TeamController {
 
 
     //updateUser
-    @DeleteMapping("team/{id}")
+    @DeleteMapping("teamID/{id}")
     public ResponseEntity<HttpStatusCode> deleteTeam(@PathVariable("id")UUID id)
     {
         service.deleteTeam(id);

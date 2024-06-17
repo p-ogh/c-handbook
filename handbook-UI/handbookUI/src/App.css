@@ -1,22 +1,15 @@
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+.teamCards{
+    padding: 20px;
+    border: 2px solid #b7b1b1;
+    border-radius: 5px;
+    margin: 15px;
+    }
 .title-name {
   display: inline-block;
 }
 
-.dropdown-menu {
-     background-color: #4CAF50;
-     color: white;
-     padding: 16px;
-     font-size: 16px;
-     border: none;
-     cursor: pointer;
-}
-
-.dropdown-menu.active, modal {
+modal {
   display: block;
 }
 
@@ -36,28 +29,57 @@ footer {
   background: rgba(0, 0, 0, 0.6);
 }
 
-
-
 .modal-header {
     justify-content: space-between;
 }
 
 .cardButtons {
+     display: flex;
+     justify-content: flex-end;
+}
+.teamListHeader {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin:  10px 20px 0px 20px;
+
+}
+.app-header{
+display: flex;
+ align-items: center;
+}
+.header-shadow{
+    z-index: 10;
+ position: fixed;
+     width: 100%;
+box-shadow: 0 .46875rem 2.1875rem rgba(4, 9, 20, .03), 0 .9375rem 1.40625rem rgba(4, 9, 20, .03), 0 .25rem .53125rem rgba(4, 9, 20, .05), 0 .125rem .1875rem rgba(4, 9, 20, .03);
+}
+.navbar{
+height: 60px;
+}
+
+.hamburger_outer{
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 6px;
 }
 
-
-
-.card-body{
+.hamburger{
+    width: 24px;
+    height: 2px;
+    background-color: #3f6ad8;
+    border-radius: 10px;
+    position: absolute;
+    transition-property: transform;
+}
+.app-main{
     display: flex;
-    align-items: center;
 }
 
-.details{
-    padding: 50px;
+.app-sidebar{
+    background: #fff;
+    height: 100vh;
 }
-
 
     /*  Helper Styles */
     body {
@@ -76,7 +98,7 @@ footer {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
-    .card-image img {
+    Card.Img{
         max-height: 100%;
         max-width: 100%;
         border-radius: 8px 8px 0px 0;
@@ -88,7 +110,7 @@ footer {
         margin-top: -25px;
         margin-right: 20px;
         z-index: 2;
-        color: #E26D5C;
+        color: #68D12A;
         background: #fff;
         border-radius: 100%;
         padding: 15px;
@@ -98,18 +120,18 @@ footer {
 
     .card-action:hover {
         color: #fff;
-        background: #E26D5C;
+        background: #68D12A;
         -webkit-animation: pulse 1.5s infinite;
     }
 
-    .card-heading {
+    Card.Title {
         font-size: 18px;
         font-weight: bold;
         background: #fff;
         padding: 10px 15px;
     }
 
-    .card-text {
+    Card.Text {
         padding: 10px 15px;
         background: #fff;
         font-size: 14px;
@@ -159,6 +181,34 @@ footer {
         }
     }
 
+.teamDashboard{
+  background-color: #f5f7fa;
+}
+nav  {
+    padding: 15px;
+ }
+
+ .teamTitle{
+     display: flex;
+     align-items: center;
+ }
 
 
+ .team-title-icon{
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    padding: .83333rem;
+    margin: 0 30px 0 0;
+    background: #fff;
+    box-shadow: 0 .46875rem 2.1875rem rgba(4, 9, 20, .03), 0 .9375rem 1.40625rem rgba(4, 9, 20, .03), 0 .25rem .53125rem rgba(4, 9, 20, .05), 0 .125rem .1875rem rgba(4, 9, 20, .03);
+    border-radius: .25rem;
+    width: 60px;
+    height: 60px;
+    }
 
+
+:root {
+     --bs-accordion-border-width: 0;

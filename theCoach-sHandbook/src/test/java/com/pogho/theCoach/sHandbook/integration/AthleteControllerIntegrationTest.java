@@ -2,7 +2,10 @@ package com.pogho.theCoach.sHandbook.integration;
 
 import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.ErrorDTO;
+import com.pogho.theCoach.sHandbook.DTO.TeamDTO;
 import com.pogho.theCoach.sHandbook.models.AthleteModel;
+import com.pogho.theCoach.sHandbook.models.CoachModel;
+import com.pogho.theCoach.sHandbook.models.TeamModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,14 +29,27 @@ public class AthleteControllerIntegrationTest {
 
     @Test
     public void testPostAthlete(){
-        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", 38, "M", "player", "Nigerian", new Date(), "active",  19, 173, 87, "available"  );
-        ResponseEntity<AthleteDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", athleteEntity, AthleteDTO.class);
-        assertEquals(athleteEntity.getFirstName(), responseEntity.getBody().getFirstName());
+        TeamModel teamModel = new TeamModel("Team 1", "Soccer", new ArrayList<>());
+        ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", teamModel, TeamDTO.class);
+        AthleteModel model = new AthleteModel("Tega", "OG", teamDTOResponseEntity.getBody().getId(), 38, "M", "player", new ArrayList<>(), new Date(), "active",  19, 173, 87, "available"  );
+        ResponseEntity<AthleteDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", model, AthleteDTO.class);
+        assertEquals(model.getFirstName(), responseEntity.getBody().getFirstName());
     }
 
     @Test
+    public void testPostCoachNoName(){
+        TeamModel teamModel = new TeamModel("Team 1", "Soccer", new ArrayList<>());
+        ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", teamModel, TeamDTO.class);
+
+        AthleteModel model = new AthleteModel("", "OG", teamDTOResponseEntity.getBody().getId(), 38, "M", "player", new ArrayList<>(), new Date(), "active",  19, 173, 87, "available"  );
+        ResponseEntity<ErrorDTO>  responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", model, ErrorDTO.class);
+        assertEquals("First Name cannot be empty or null.", responseEntity.getBody().getMessage());
+    }
+    @Test
     public void testGetAthleteWithCorrectID(){
-        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", 19, 173, 87, "available"  );
+        TeamModel model = new TeamModel("Team 1", "Soccer", new ArrayList<>());
+        ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", model, TeamDTO.class);
+        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", teamDTOResponseEntity.getBody().getId(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
         ResponseEntity<AthleteDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/athletes/athlete", athleteEntity, AthleteDTO.class);
         ResponseEntity<AthleteDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/athletes/athlete/"+ responseEntity.getBody().getId(), AthleteDTO.class);
 

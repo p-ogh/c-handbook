@@ -12,7 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,7 +29,7 @@ public class AthleteServiceUnitTest {
 
     @Test
     public void AthleteCreatedWithNoNameFails() {
-        AthleteModel athleteEntity = new AthleteModel("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 19, 173, 87, "available"  );
+        AthleteModel athleteEntity = new AthleteModel("", "lastName", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
         Assertions.assertThrows(NoNameException.class, () -> {
             athleteService.saveAthlete(athleteEntity);
         });
@@ -35,7 +37,7 @@ public class AthleteServiceUnitTest {
 
     @Test
     public void AthleteCreatedWithNamePasses() {
-        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", 38, "M", "manager", "Nigerian", new Date(), "active", 19, 173, 87, "available"  );
+        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
         AthleteDTO athleteDTO =   athleteService.saveAthlete(athleteEntity);
         Assertions.assertNotNull(athleteDTO.getId());
         assertEquals(athleteDTO.getFirstName(), athleteEntity.getFirstName());

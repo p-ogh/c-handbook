@@ -1,29 +1,40 @@
-import {useState} from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHouseUser } from '@fortawesome/free-solid-svg-icons'
+import Button from 'react-bootstrap/Button';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+
+
+
 
 function Header(){
-            const [isOpen, setIsOpen] = useState(false);
-
 
     return(
-        <>
-        <header className="mb-3 header">
+        <Navbar className="header-shadow" bg="light" data-bs-theme="light" style={{padding:20, display:'flex', }}>
+                <Navbar.Toggle />
 
-                <nav className="navbar navbar-expand-lg navbar-dark bg-transparent">
-                  <div className="container">
-                    <a className="navbar-brand" href="#">The Coaches Handbook</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                      <span className="navbar-toggler-icon"></span>
-                    </button>
+                <div className="app-header">
+                    <Navbar.Brand href="/">The Coaches Handbook</Navbar.Brand>
+                    <div className="hamburger_outer ml-auto">
+{/*                             <button type="button" className="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar"> */}
+{/*                                 <FontAwesomeIcon icon={faBars}/> */}
+{/*                             </button> */}
+                            <Button className="hamburger close-sidebar-btn hamburger--elastic" variant="light" type="button"><FontAwesomeIcon icon={faBars} /></Button>
 
-                     <h5>Dashboard</h5>
-                  </div>
-                </nav>
+                    </div>
+                </div>
 
-        </header>
-
-        </>
-
+                  <Navbar.Collapse className="justify-content-end">
+                                    <Navbar.Text>
+                                       <Link to={`/`}><FontAwesomeIcon icon={faHouseUser} />{" "}Dashboard</Link>
+                                    </Navbar.Text>
+                  </Navbar.Collapse>
+        </Navbar>
     )
 }
 
 export default Header
+
+

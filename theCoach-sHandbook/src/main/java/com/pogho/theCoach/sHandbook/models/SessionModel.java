@@ -6,21 +6,25 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class SessionModel extends AbstractSessionModel {
-    private UUID athleteId;
-    private UUID programId;
+public class SessionModel extends RecordModel {
+
     private LocalDateTime start;
-    private LocalDateTime end;
-    private int maxHeartRate;
-    private int caloriesBurned;
-    private String location;
+    private LocalDateTime end; //can be null
+    private int duration;
     private int rating;
-    private int sorenessLevel;
+    private String location;
+    private boolean teamSession;
+
+    public SessionModel(Date created, String notes, boolean teamSession, String location) {
+        super(created, notes);
+        this.teamSession = teamSession;
+        this.location = location;
+    }
 
 }

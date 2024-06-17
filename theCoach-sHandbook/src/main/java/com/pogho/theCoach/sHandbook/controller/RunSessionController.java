@@ -18,52 +18,19 @@ public class RunSessionController {
     @Autowired
     private RunService runService;
 
-    //getAllRunsforAll Athletes
+    //getAllRunsforAll
     @GetMapping("all")
     public ResponseEntity<List<RunSessionDTO>> fetchRunsList()
     {
         return new ResponseEntity<>(runService.fetchRunsList(), HttpStatus.OK);
-
     }
 
-    //getUsers
-    @GetMapping("athlete/{oid}/all")
-    public ResponseEntity<List<RunSessionDTO>> fetchRunsListByAthlete(@PathVariable("oid") UUID oid)
-    {
-        return new ResponseEntity<>(runService.fetchRunsListByAthlete(oid), HttpStatus.OK);
 
-    }
-
-    //getUser
     @GetMapping("{oid}")
     public ResponseEntity<RunSessionDTO> fetchRun(@PathVariable("oid") UUID oid)
     {
         return new ResponseEntity<>(runService.fetchRun(oid), HttpStatus.OK);
-
-    }
-
-    //addUser
-    @PostMapping("athlete/{oid}")
-    public ResponseEntity<RunSessionDTO> saveAthleteRun(@PathVariable("oid") UUID oid, @RequestBody RunExerciseModel run) {
-
-        return new ResponseEntity<>(runService.saveAthleteRun(oid, run), HttpStatus.CREATED);
-
     }
 
 
-//    //updateUser
-//    @PutMapping("{oid}")
-//    public ResponseEntity<RunSessionDTO> updateRun(@PathVariable("oid")UUID oid, @RequestBody RunExerciseEntity run)
-//    {
-//        return new ResponseEntity<>(runService.updateRun(oid, run), HttpStatus.OK);
-//    }
-
-
-    //updateUser
-    @DeleteMapping("athlete/{oid}")
-    public ResponseEntity<HttpStatusCode> deleteRun(@PathVariable("oid")UUID oid)
-    {
-        runService.deleteRun(oid);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

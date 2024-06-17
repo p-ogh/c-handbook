@@ -6,16 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class PlanModel extends AbstractSessionModel {
+public class PlanModel {
 
     private IntensityLevel intensityLevel; //low,medium,high
     private String trainingFocus;  //endurance, strength, flexibility, weightloss, speed, recovery, competition,
     private String location;
     private boolean completed;
+    private List<UUID> sessions;
 
 
 

@@ -19,7 +19,7 @@ public class CoachController {
 
     //getUsers
     @GetMapping("all")
-    public ResponseEntity<List<CoachDTO>> fetchCoachsList()
+    public ResponseEntity<List<CoachDTO>> fetchCoachesList()
     {
         return new ResponseEntity<>(coachService.fetchCoachsList(), HttpStatus.OK);
 

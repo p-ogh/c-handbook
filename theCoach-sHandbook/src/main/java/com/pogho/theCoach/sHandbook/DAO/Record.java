@@ -17,9 +17,9 @@ import java.util.UUID;
 public abstract class Record {
     @Id
     private UUID id;
-    private UUID athleteId;
     @CreatedDate
     private Date created;
+    private UUID teamId;
     private String notes;
 
 

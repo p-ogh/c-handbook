@@ -12,7 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,15 +31,15 @@ public class CoachServiceUnitTest {
 
     @Test
     public void CoachCreatedWithNoNameFails() {
-        CoachModel coachEntity = new CoachModel("", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        CoachModel model = new CoachModel("", "lastName", UUID.randomUUID(), 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         Assertions.assertThrows(NoNameException.class, () -> {
-            coachService.saveCoach(coachEntity);
+            coachService.saveCoach(model);
         });
     }
 
     @Test
     public void CoachCreatedWithNamePasses() {
-        CoachModel coachModel = new CoachModel("firstName", "lastName", 35, "M", "manager", "Spanish", new Date(), "active", 10 );
+        CoachModel coachModel = new CoachModel("firstName", "lastName", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         CoachDTO coachDTO =   coachService.saveCoach(coachModel);
         Assertions.assertNotNull(coachDTO.getId());
         assertEquals(coachDTO.getFirstName(), coachModel.getFirstName());
