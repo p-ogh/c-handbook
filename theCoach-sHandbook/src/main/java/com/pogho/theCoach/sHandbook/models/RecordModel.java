@@ -14,6 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class RecordModel {
 
+    private UUID teamId;
     private Date created;
     private String notes;
+
 }

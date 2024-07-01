@@ -75,6 +75,9 @@ CREATE TABLE session_table(
   rating SMALLINT,
   location VARCHAR(50),
   status VARCHAR,
+  team_session bool NOT NULL,
+  participants uuid[],
+  session_type VARCHAR,
   FOREIGN KEY (team_id) REFERENCES team(id)
 );
 
@@ -83,8 +86,10 @@ CREATE TABLE session_table(
 CREATE TABLE season(
   id uuid PRIMARY KEY,
   name VARCHAR NOT NULL,
+  team_id uuid NOT NULL,
   start_date DATE NOT NULL,
-  end_date DATE NOT NULL
+  end_date DATE NOT NULL,
+  status VARCHAR NOT NULL
   );
 
 CREATE TABLE match_session(
@@ -96,7 +101,8 @@ CREATE TABLE match_session(
 );
 
 CREATE TABLE training_session(
-  id uuid PRIMARY KEY
+  id uuid PRIMARY KEY,
+  exercises uuid[]
 
 );
 
@@ -112,10 +118,7 @@ CREATE TABLE exercise(
   name VARCHAR NOT NULL,
   duration INT,
   reps INT,
-  sets INT,
-  training_session_id uuid,
-  CONSTRAINT fk_training_session
-  FOREIGN KEY (training_session_id) REFERENCES session_table(id) ON DELETE CASCADE
+  sets INT
 );
 
 CREATE TABLE performance_data(
@@ -124,6 +127,7 @@ CREATE TABLE performance_data(
    team_id uuid NOT NULL,
    notes VARCHAR,
    session_id uuid NOT NULL,
+   session_type VARCHAR,
    athlete_id uuid NOT NULL,
    rating INT NOT NULL,
    FOREIGN KEY (session_id) REFERENCES session_table(id) ON DELETE CASCADE

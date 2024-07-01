@@ -18,16 +18,21 @@ public class Season {
     private UUID id;
     private String name;
 
+    private UUID teamId;
+
     @Column(name="start_date")
     private Date startDate;
 
     @Column(name="end_date")
     private Date endDate;
 
+    private String status;
 
-    public void updateSeason (String name, Date startDate, Date endDate){
+
+    public void updateSeason (String name, Date startDate, Date endDate, String status){
         this.name = name;
         this.startDate= startDate;
         this.endDate = endDate;
+        this.status = status;
     }
 }

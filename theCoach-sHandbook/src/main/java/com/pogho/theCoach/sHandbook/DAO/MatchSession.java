@@ -24,8 +24,8 @@ public class MatchSession extends Session{
    private int opponentScore;
 
 
-    public MatchSession(UUID id, Date created, UUID teamId, String notes, String location, String opponent, boolean home, int teamScore, int opponentScore) {
-        super(id, created, teamId, notes, location);
+    public MatchSession(UUID id, Date created, UUID teamId, String notes, Boolean teamSession, List<UUID> participants, String status, String sessionType, String location, String opponent, boolean home, int teamScore, int opponentScore) {
+        super(id, created, teamId, notes, location, teamSession, participants, status, sessionType);
         this.opponent = opponent;
         this.home = home;
         this.teamScore = teamScore;

@@ -1,5 +1,6 @@
 
 import AccordionComponent from './AccordionComponent.jsx'
+import AddTeamModal from './AddTeamModal.jsx'
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,18 +11,23 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 
 
-function Sidebar(){
-    const [teamData, setTeamData] = useState([]);
-        useEffect(() => {fetchData();
-            },[]);
+function Sidebar({data, onFormSubmit}){
+//     const [teamData, setTeamData] = useState([]);
+//         useEffect(() => {fetchData();
+//             },[]);
+//
+//         const fetchData = async () => {
+//             //Fetch Data from Api
+//             fetch('http://localhost:8181/teams/active')
+//             .then(response => response.json())
+//             .then(data => setTeamData(data))
+//             .catch(error => console.error('Error fetching data: ', error));
+//         };
+    const handleFormSubmit = (newData) =>{
+//             setTeamData(teamData => [...teamData, data]);
+                      onFormSubmit(newData);
 
-        const fetchData = async () => {
-            //Fetch Data from Api
-            fetch('http://localhost:8181/teams/active')
-            .then(response => response.json())
-            .then(data => setTeamData(data))
-            .catch(error => console.error('Error fetching data: ', error));
-        };
+        }
 
 
 
@@ -30,21 +36,21 @@ function Sidebar(){
 
              <ListGroup as="ul" className="vertical-nav-menu" variant="flush">
                   <ListGroup.Item as="li" >
-                   <Link className="app-sidebar__heading" to={`/`}><FontAwesomeIcon icon={faHouseUser} />{" "}Dashboard</Link> </ListGroup.Item>
+                      <Link className="app-sidebar__heading" to={`/`}><FontAwesomeIcon icon={faHouseUser} />{" "}Dashboard</Link> </ListGroup.Item>
                   <ListGroup.Item as="li" disabled><h1 className="app-sidebar__heading"><FontAwesomeIcon icon={faShieldHalved} />{" "}Teams</h1></ListGroup.Item>
-                  <ListGroup.Item as="button" className="vertical_nav"><FontAwesomeIcon icon={faSquarePlus}/>{" "}Add New Team</ListGroup.Item>
-                  <ListGroup.Item as="li">{teamData.length ===0 ? (
-                                                                                  <p>Please add New team to view team details</p> ) : (
-                                                                                      <div className="availableTeams">
-                                                                                          {teamData.map( (team) =>(
-                                                                                               <AccordionComponent className="vertical_nav_accordion" key={team.id} data ={team}/>
+                  <ListGroup.Item ><AddTeamModal name="vertical_nav" onSubmit={handleFormSubmit}/></ListGroup.Item>
+                  <ListGroup.Item as="li">{data.length ===0 ? (
+                      <p>Please add New team to view team details</p> ) : (
+                          <div className="availableTeams">
+                              {data.map( (team) =>(
+                                  <AccordionComponent className="vertical_nav_accordion" key={team.id} data ={team}/>
+                                    )
+                                      ) }
+                          </div>
+                      ) }
+                  </ListGroup.Item>
+             </ListGroup>
 
-                                                                                              )
-                                                                                              ) }
-                                                                                      </div>
-                                                                                      )
-                                                                                  }</ListGroup.Item>
-                </ListGroup>
         </div>
         )
 

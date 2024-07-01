@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface SessionRepository extends JpaRepository<Session, UUID> {
 
+    int countByTeamIdAndSessionType(UUID team_id, String type);
 
 }

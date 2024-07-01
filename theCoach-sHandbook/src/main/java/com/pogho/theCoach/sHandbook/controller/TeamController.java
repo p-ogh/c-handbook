@@ -2,6 +2,7 @@ package com.pogho.theCoach.sHandbook.controller;
 
 import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.TeamDTO;
+import com.pogho.theCoach.sHandbook.DTO.TeamSummaryDTO;
 import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.models.TeamModel;
 import com.pogho.theCoach.sHandbook.service.TeamService;
@@ -41,6 +42,14 @@ public class TeamController {
     public ResponseEntity<TeamDTO> fetchTeam(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeam(id), HttpStatus.OK);
+
+    }
+
+    //getUser
+    @GetMapping("team/{id}/summary")
+    public ResponseEntity<TeamSummaryDTO> fetchTeamSummary(@PathVariable("id") UUID id)
+    {
+        return new ResponseEntity<>(service.fetchTeamSummary(id), HttpStatus.OK);
 
     }
 

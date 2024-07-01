@@ -2,10 +2,14 @@ package com.pogho.theCoach.sHandbook.service;
 
 import com.pogho.theCoach.sHandbook.DAO.Team;
 import com.pogho.theCoach.sHandbook.DTO.TeamDTO;
+import com.pogho.theCoach.sHandbook.DTO.TeamSummaryDTO;
 import com.pogho.theCoach.sHandbook.exceptions.NotFoundException;
 import com.pogho.theCoach.sHandbook.factory.TeamFactory;
 import com.pogho.theCoach.sHandbook.mapper.ModelMapper;
 import com.pogho.theCoach.sHandbook.models.TeamModel;
+import com.pogho.theCoach.sHandbook.repository.AthleteRepository;
+import com.pogho.theCoach.sHandbook.repository.SeasonRepository;
+import com.pogho.theCoach.sHandbook.repository.SessionRepository;
 import com.pogho.theCoach.sHandbook.repository.TeamRepository;
 import com.pogho.theCoach.sHandbook.validations.RecordValidation;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +26,14 @@ public class TeamService {
 
     @Autowired
     private TeamRepository repository;
+    @Autowired
+    private AthleteRepository athleteRepository;
+
+    @Autowired
+    private SessionRepository sessionRepository;
+
+    @Autowired
+    private SeasonRepository seasonRepository;
 
     private final TeamFactory factory = new TeamFactory();
 
@@ -87,6 +99,28 @@ public class TeamService {
     public void deleteTeam(UUID id) {
 
         repository.deleteById(id);
+
+    }
+
+    public TeamSummaryDTO fetchTeamSummary(UUID id) {
+        Optional<Team> optionalTeam = repository.findById(id);
+        //if optional team exists get team, else return not found.
+        TeamSummaryDTO teamSummaryDTO;
+
+        if(optionalTeam.isPresent()){
+            int athletes = athleteRepository.countByTeamId(id);
+            int events = 0;
+            int games = sessionRepository.countByTeamIdAndSessionType(id, "");
+            int seasons = seasonRepository.countByTeamId(id);
+
+            Team team = optionalTeam.get();
+             teamSummaryDTO = new  TeamSummaryDTO(id, team.getName(), athletes, events, seasons, games);
+        }
+        else {
+            throw new NotFoundException("No Team found with ID: " + id);
+        }
+
+        return teamSummaryDTO;
 
     }
 

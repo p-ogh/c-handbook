@@ -9,14 +9,14 @@ import java.util.UUID;
 
 public class ExerciseFactory {
 
-    public Exercise createExercise(TrainingSession session, ExerciseModel model) {
+    public Exercise createExercise(ExerciseModel model) {
 
-    return new Exercise(UUID.randomUUID(), model.getName(), model.getDuration(), model.getReps(), model.getSets(), session);
+    return new Exercise(UUID.randomUUID(), model.getName(), model.getDuration(), model.getReps(), model.getSets());
     }
 
-    public List<Exercise> createExercises(TrainingSession session, List<ExerciseModel> models){
+    public List<Exercise> createExercises(List<ExerciseModel> models){
 
 
-        return models.stream().map(model -> createExercise(session, model)).toList();
+        return models.stream().map(this::createExercise).toList();
     }
 }

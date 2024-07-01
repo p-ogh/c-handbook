@@ -22,12 +22,12 @@ public class PracticeSession extends Session{
    private String focus;
 
 
-//    public PracticeSession(UUID id, Date created,UUID teamId, String notes, String location, List<String> drills) {
-//        super(id, created, teamId, notes, location);
-//        this.drills = drills;
-//    }
-//
-//    protected void updatePractice( List<String> drills) {
-//        this.drills = drills;
-//    }
+   public PracticeSession(UUID id, Date created, UUID teamId, String notes, String location, Boolean teamSession, List<UUID> participants, String status, String sessionType, String focus) {
+      super(id, created, teamId, notes, location, teamSession, participants, status, sessionType);
+      this.focus = focus;
+   }
+
+    public void updatePractice(String focus) {
+        this.focus = focus;
+    }
 }

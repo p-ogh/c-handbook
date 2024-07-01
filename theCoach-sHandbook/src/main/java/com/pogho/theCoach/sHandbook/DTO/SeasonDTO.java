@@ -7,6 +7,8 @@ public class SeasonDTO {
 
     private UUID id;
     private String name;
+    private UUID teamId;
     private Date startDate;
     private Date endDate;
+    private String status;
 }

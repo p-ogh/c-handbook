@@ -17,6 +17,7 @@ import java.util.UUID;
 @RequestMapping("/season")
 @RestController
 public class SeasonController {
+
     @Autowired
     private SeasonService service;
 

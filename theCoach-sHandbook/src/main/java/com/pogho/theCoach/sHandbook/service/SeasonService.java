@@ -64,7 +64,7 @@ public class SeasonService {
         if(optionalSeason.isPresent()){
             Season season = optionalSeason.get();
 
-            season.updateSeason(seasonModel.getName(), seasonModel.getStartDate(), seasonModel.getEndDate());
+            season.updateSeason(seasonModel.getName(), seasonModel.getStartDate(), seasonModel.getEndDate(), seasonModel.getStatus());
             repository.save(season);
 
             return mapper.modelToDto(season);

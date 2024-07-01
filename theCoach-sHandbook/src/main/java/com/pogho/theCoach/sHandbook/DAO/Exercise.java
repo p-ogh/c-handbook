@@ -22,8 +22,4 @@ public class Exercise {
     private int reps;
     private int sets;
 
-    @ManyToOne
-    @JoinColumn(name = "training_session_id")
-    private TrainingSession trainingSession;
-
 }

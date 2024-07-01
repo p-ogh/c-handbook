@@ -4,6 +4,7 @@ import com.pogho.theCoach.sHandbook.DTO.MatchSessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.PracticeSessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.SessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.TrainingSessionDTO;
+import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.models.SessionModel;
 import com.pogho.theCoach.sHandbook.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,30 @@ public class SessionController {
     public ResponseEntity<List<PracticeSessionDTO>> fetchPracticeSessions()
     {
         return new ResponseEntity<>(service.fetchPracticeSessions(), HttpStatus.OK);
+    }
+
+    @PostMapping("session")
+    public ResponseEntity<SessionDTO> addNewSession(@RequestBody SessionModel session)
+    {
+        return new ResponseEntity<>(service.addNewSession(session), HttpStatus.OK);
+    }
+
+    @PutMapping("session/{id}/start")
+    public ResponseEntity<SessionDTO> startSession(@PathVariable("id") UUID id)
+    {
+        return new ResponseEntity<>(service.startSession(id), HttpStatus.OK);
+    }
+
+    @PutMapping("session/{id}/end")
+    public ResponseEntity<SessionDTO> endSession(@PathVariable("id") UUID id)
+    {
+        return new ResponseEntity<>(service.endSession(id), HttpStatus.OK);
+    }
+
+    @PutMapping("session/{id}")
+    public ResponseEntity<SessionDTO> updateSession(@PathVariable("id") UUID id, @RequestBody SessionModel model)
+    {
+        return new ResponseEntity<>(service.updateSession(id, model), HttpStatus.OK);
     }
 
 }

@@ -38,7 +38,9 @@ public interface ModelMapper {
     PracticeSession dtoToModel(PracticeSessionDTO sessionDTO);
     PracticeSessionDTO modelToDto(PracticeSession session);
 
-
     Run dtoToModel(RunSessionDTO sessionDTO);
     RunSessionDTO modelToDto(Run run);
+
+    PerformanceData dtoToModel(PerformanceDataDTO dto);
+    PerformanceDataDTO modelToDto(PerformanceData data);
 }

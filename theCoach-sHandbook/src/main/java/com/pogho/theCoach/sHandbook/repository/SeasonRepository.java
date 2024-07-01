@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface SeasonRepository extends JpaRepository<Season, UUID> {
 
+    int countByTeamId(UUID team_id);
+
 }

@@ -18,15 +18,15 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class TrainingSession extends Session{
 
-    @OneToMany(mappedBy = "trainingSession", cascade = CascadeType.ALL)
-   private List<Exercise> exercises;// running, strength training, cycling, yoga
+   private List<UUID> exercises;// running, strength training, cycling, yoga
 
 
-    public TrainingSession(UUID id, Date created, UUID teamId, String notes, String location, List<Exercise> exercises) {
-        super(id, created, teamId, notes, location);
+    public TrainingSession(UUID id, Date created, UUID teamId, String notes, String location, Boolean teamSession, List<UUID> participants, String status, String sessionType, List<UUID> exercises) {
+        super(id, created, teamId, notes, location, teamSession, participants, status, sessionType);
         this.exercises = exercises;
     }
 
-    protected void updateTraining( List<Exercise> exercises) {
-        this.exercises = exercises;  }
+    protected void updateTraining( List<UUID> exercises) {
+        this.exercises = exercises;
+    }
 }

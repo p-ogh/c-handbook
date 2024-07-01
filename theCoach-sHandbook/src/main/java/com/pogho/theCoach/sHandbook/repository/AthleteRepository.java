@@ -14,7 +14,7 @@ public interface AthleteRepository extends JpaRepository<Athlete, UUID> {
  //@Query("SELECT COUNT(*) FROM athlete where team_id=?1")
  List<Athlete> findByTeamId(UUID team_id);
 
-    // List<Athlete> findByTeam_ID(UUID teamId);
+ int countByTeamId(UUID team_id);
 
-//    List<Member> findMembers();
+
 }

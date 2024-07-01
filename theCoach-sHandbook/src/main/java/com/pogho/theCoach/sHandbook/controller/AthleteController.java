@@ -26,7 +26,7 @@ public class AthleteController {
 
     }
     //getUsers
-    @GetMapping("teamID/{id}/athlete")
+    @GetMapping("teamId/{id}/athlete")
     public ResponseEntity<List<AthleteDTO>> fetchTeamAthletes(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeamAthletes(id), HttpStatus.OK);
@@ -35,26 +35,26 @@ public class AthleteController {
 
     //getUser
     @GetMapping("athlete/{oid}")
-    public ResponseEntity<AthleteDTO> fetchAthlete(@PathVariable("oid") UUID oid)
+    public ResponseEntity<AthleteDTO> fetchAthlete(@PathVariable("oid") UUID id)
     {
-        return new ResponseEntity<>(service.fetchAthlete(oid), HttpStatus.OK);
+        return new ResponseEntity<>(service.fetchAthlete(id), HttpStatus.OK);
 
     }
 
     //addUser
     @PostMapping("athlete")
-    public ResponseEntity<AthleteDTO> saveAthlete(@RequestBody AthleteModel athleteEntity) {
+    public ResponseEntity<AthleteDTO> saveAthlete(@RequestBody AthleteModel athlete) {
 
-        return new ResponseEntity<>(service.saveAthlete(athleteEntity), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.saveAthlete(athlete), HttpStatus.CREATED);
 
     }
 
 
     //updateUser
     @PutMapping("athlete/{oid}")
-    public ResponseEntity<AthleteDTO> updateAthlete(@PathVariable("oid")UUID oid, @RequestBody AthleteModel athleteEntity)
+    public ResponseEntity<AthleteDTO> updateAthlete(@PathVariable("oid")UUID oid, @RequestBody AthleteModel athlete)
     {
-        return new ResponseEntity<>(service.updateAthlete(oid, athleteEntity), HttpStatus.OK);
+        return new ResponseEntity<>(service.updateAthlete(oid, athlete), HttpStatus.OK);
     }
 
 

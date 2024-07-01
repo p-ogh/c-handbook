@@ -181,9 +181,15 @@ height: 60px;
         }
     }
 
-.teamDashboard{
+.teamDashboard_main{
   background-color: #f5f7fa;
+  display: flex
 }
+
+.teamDash{
+    margin: 10px 20px 0px 20px;
+}
+
 nav  {
     padding: 15px;
  }
@@ -209,6 +215,23 @@ nav  {
     height: 60px;
     }
 
+.app-sidebar__heading {
+    text-transform: uppercase;
+    font-size: .8rem;
+    margin: .75rem 0;
+    font-weight: 700;
+    color: #3f6ad8;
+    white-space: nowrap;
+    position: relative;
+}
+
+
+
+ .accordion{
+     margin: 0 0 0 0px;
+     }
+
 
 :root {
      --bs-accordion-border-width: 0;
+     }

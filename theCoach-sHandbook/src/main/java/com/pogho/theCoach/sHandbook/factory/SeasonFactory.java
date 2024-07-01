@@ -9,6 +9,6 @@ public class SeasonFactory {
 
     public Season createSeason(SeasonModel model) {
 
-        return new Season(UUID.randomUUID(), model.getName(), model.getStartDate(), model.getEndDate());
+        return new Season(UUID.randomUUID(), model.getName(), model.getTeamId(), model.getStartDate(), model.getEndDate(), model.getStatus());
     }
 }
