@@ -1,4 +1,3 @@
 # c-handbook
 #coaches handbook application -
-description -for tracking athletes
-
+This application is a journal for coaches to track the athletic progress and fitness of their players or clients.
