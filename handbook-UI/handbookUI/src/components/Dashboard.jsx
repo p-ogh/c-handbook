@@ -44,7 +44,7 @@ function Dashboard({data, onFormSubmit}) {
                          </div>
                          <div className="teamDescription">
                             <h5 className="text-uppercase">Team Dashboard</h5>
-                            <p>Dashboard for all teams</p>
+                            <p>List of all teams</p>
                         </div>
                     </div>
                     <div className= "cardButtons">

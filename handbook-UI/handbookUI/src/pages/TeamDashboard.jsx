@@ -1,4 +1,6 @@
 import NavHeader from '../components/NavHeader.jsx'
+import { Routes, Route, Link } from 'react-router-dom'
+
 import Footer from '../components/Footer.jsx'
 import Sidebar from '../components/Sidebar.jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -83,7 +85,8 @@ function TeamDashboard(){
                                 </div>
                                 <div>
                                   <h4>Active Players</h4>
-                                  <p className="mb-0">Player Profiles</p>
+                                   <Link className="view-players" to={`/players`} state={{ id: id }}>Player Profiles</Link>
+
                                 </div>
                               </div>
                               <div className="align-self-center">
