@@ -27,18 +27,18 @@ public class MemberService {
     }
 
 
-    public ResponseEntity<MemberDTO> saveMember(MemberModel memberModel) throws IllegalArgumentException{
-        if(memberModel instanceof CoachModel){
-            Coach coach = coachfactory.createCoach((CoachModel) memberModel);
-            coachRepository.save(coach);
-            return new ResponseEntity<>(mapper.modelToDto(coach), HttpStatus.CREATED);
-        }
-        else {
-            throw new IllegalArgumentException("Unknown member type");
-        }
+    // public ResponseEntity<MemberDTO> saveMember(MemberModel memberModel) throws IllegalArgumentException{
+    //     if(memberModel instanceof CoachModel){
+    //         Coach coach = coachfactory.createCoach((CoachModel) memberModel);
+    //         coachRepository.save(coach);
+    //         return new ResponseEntity<>(mapper.modelToDto(coach), HttpStatus.CREATED);
+    //     }
+    //     else {
+    //         throw new IllegalArgumentException("Unknown member type");
+    //     }
 
 
-    }
+    // }
 
   //  public ResponseEntity<MemberDTO> updateMember(UUID oid, MemberEntity memberEntity) {
 //        Optional<Member> optionalMember = memberRepository.findById(oid);

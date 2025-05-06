@@ -31,16 +31,19 @@ public class CoachServiceUnitTest {
 
     @Test
     public void CoachCreatedWithNoNameFails() {
-        CoachModel model = new CoachModel("", "lastName", UUID.randomUUID(), 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
+        UUID teamId = UUID.randomUUID();
+        CoachModel model = new CoachModel("", "lastName", 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         Assertions.assertThrows(NoNameException.class, () -> {
-            coachService.saveCoach(model);
+            coachService.saveCoach(teamId,model);
         });
     }
 
     @Test
     public void CoachCreatedWithNamePasses() {
-        CoachModel coachModel = new CoachModel("firstName", "lastName", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
-        CoachDTO coachDTO =   coachService.saveCoach(coachModel);
+        UUID teamId = UUID.randomUUID();
+
+        CoachModel coachModel = new CoachModel("firstName", "lastName", 38, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
+        CoachDTO coachDTO =   coachService.saveCoach(teamId,coachModel);
         Assertions.assertNotNull(coachDTO.getId());
         assertEquals(coachDTO.getFirstName(), coachModel.getFirstName());
         assertEquals(coachDTO.getLastName(), coachModel.getLastName());

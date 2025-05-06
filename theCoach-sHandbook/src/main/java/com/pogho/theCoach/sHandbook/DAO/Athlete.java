@@ -33,8 +33,8 @@ public class Athlete extends Member{
     }
 
 
-    public void updateAthlete(String firstName, String lastName, UUID teamID, int age, String gender, String role, List<UUID> seasons, String status, int jerseyNumber, double height, double weight, String availability) {
-        super.updateMember(firstName, lastName, teamID, age, gender, role, seasons, status);
+    public void updateAthlete(String firstName, String lastName, int age, String gender, String role, List<UUID> seasons, String status, int jerseyNumber, double height, double weight, String availability) {
+        super.updateMember(firstName, lastName, age, gender, role, seasons, status);
         this.jerseyNumber = jerseyNumber;
         this.height = height;
         this.weight = weight;

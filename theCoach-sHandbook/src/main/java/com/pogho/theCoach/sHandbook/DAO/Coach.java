@@ -24,8 +24,8 @@ public class Coach extends Member{
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    public void updateCoach(String firstName, String lastName,UUID teamID, int age, String gender, String role, List<UUID> seasons, String status, int yearsOfExperience) {
-    super.updateMember(firstName, lastName,teamID, age, gender, role, seasons,status);
+    public void updateCoach(String firstName, String lastName, int age, String gender, String role, List<UUID> seasons, String status, int yearsOfExperience) {
+    super.updateMember(firstName, lastName, age, gender, role, seasons,status);
     this.yearsOfExperience = yearsOfExperience;
 
     }

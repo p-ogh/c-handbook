@@ -11,8 +11,8 @@ import java.util.UUID;
 @Component
 public class CoachFactory {
 
-    public Coach createCoach(CoachModel model) {
+    public Coach createCoach(UUID teamId, CoachModel model) {
 
-        return new Coach(UUID.randomUUID(), model.getFirstName(),model.getLastName(), model.getTeamID(), model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), new Date(), Status.active.toString(), model.getYearsOfExperience());
+        return new Coach(UUID.randomUUID(), model.getFirstName(),model.getLastName(), teamId, model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), new Date(), Status.active.toString(), model.getYearsOfExperience());
     }
 }

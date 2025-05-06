@@ -50,9 +50,9 @@ public class AthleteService {
         }
     }
 
-    public AthleteDTO saveAthlete(AthleteModel athleteModel) {
+    public AthleteDTO saveAthlete(UUID id, AthleteModel athleteModel) {
         MemberValidation.validate(athleteModel.getFirstName());
-        Athlete athlete = athleteFactory.createAthlete(athleteModel);
+        Athlete athlete = athleteFactory.createAthlete(id, athleteModel);
         athleteRepository.save(athlete);
         return MemberMapper.toDto(athlete);
 
@@ -66,7 +66,7 @@ public class AthleteService {
         if(optionalAthlete.isPresent()){
             Athlete athlete = optionalAthlete.get();
 
-            athlete.updateAthlete(model.getFirstName(), model.getLastName(), model.getTeamID(), model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), model.getStatus(), athlete.getJerseyNumber(), model.getHeight(), model.getWeight(), model.getAvailability());
+            athlete.updateAthlete(model.getFirstName(), model.getLastName(), model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), model.getStatus(), athlete.getJerseyNumber(), model.getHeight(), model.getWeight(), model.getAvailability());
             athleteRepository.save(athlete);
 
             return MemberMapper.toDto(athlete);

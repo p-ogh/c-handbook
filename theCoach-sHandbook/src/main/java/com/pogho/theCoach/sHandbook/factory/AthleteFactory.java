@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class AthleteFactory {
 
-    public Athlete createAthlete(AthleteModel model) {
+    public Athlete createAthlete(UUID teamId, AthleteModel model) {
 
-        return new Athlete(UUID.randomUUID(), model.getFirstName(),model.getLastName(), model.getTeamID(), model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), new Date(), Status.active.toString(), model.getJerseyNumber(), model.getHeight(), model.getWeight(), model.getAvailability());
+        return new Athlete(UUID.randomUUID(), model.getFirstName(),model.getLastName(), teamId, model.getAge(), model.getGender(), model.getRole(),model.getSeasons(), new Date(), Status.active.toString(), model.getJerseyNumber(), model.getHeight(), model.getWeight(), model.getAvailability());
     }
 }

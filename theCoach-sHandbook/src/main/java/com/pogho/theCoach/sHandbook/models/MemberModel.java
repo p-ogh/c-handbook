@@ -14,7 +14,6 @@ import java.util.UUID;
 public class MemberModel {
     private String firstName;
     private String lastName;
-    private UUID teamID;
     private int age;
     private String gender;
     private String role;

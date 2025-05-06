@@ -34,10 +34,10 @@ public class CoachController {
     }
 
     //addUser
-    @PostMapping("coach")
-    public ResponseEntity<CoachDTO> saveCoach(@RequestBody CoachModel coachEntity) {
+    @PostMapping("team/{id}/add")
+    public ResponseEntity<CoachDTO> saveCoach(@PathVariable("id") UUID id, @RequestBody CoachModel coachEntity) {
 
-        return new ResponseEntity<>(coachService.saveCoach(coachEntity), HttpStatus.CREATED);
+        return new ResponseEntity<>(coachService.saveCoach(id, coachEntity), HttpStatus.CREATED);
 
     }
 

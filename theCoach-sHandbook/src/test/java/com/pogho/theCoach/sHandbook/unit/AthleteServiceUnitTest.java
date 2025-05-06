@@ -29,16 +29,18 @@ public class AthleteServiceUnitTest {
 
     @Test
     public void AthleteCreatedWithNoNameFails() {
-        AthleteModel athleteEntity = new AthleteModel("", "lastName", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
+        UUID teamId = UUID.randomUUID();
+        AthleteModel athleteEntity = new AthleteModel("", "lastName", 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
         Assertions.assertThrows(NoNameException.class, () -> {
-            athleteService.saveAthlete(athleteEntity);
+            athleteService.saveAthlete(teamId,athleteEntity);
         });
     }
 
     @Test
     public void AthleteCreatedWithNamePasses() {
-        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", UUID.randomUUID(), 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
-        AthleteDTO athleteDTO =   athleteService.saveAthlete(athleteEntity);
+        UUID teamId = UUID.randomUUID();
+        AthleteModel athleteEntity = new AthleteModel("Tega", "OG", 38, "M", "manager", new ArrayList<>(), new Date(), "active", 19, 173, 87, "available"  );
+        AthleteDTO athleteDTO =   athleteService.saveAthlete(teamId,athleteEntity);
         Assertions.assertNotNull(athleteDTO.getId());
         assertEquals(athleteDTO.getFirstName(), athleteEntity.getFirstName());
         assertEquals(athleteDTO.getLastName(), athleteEntity.getLastName());

@@ -31,10 +31,9 @@ public abstract class Member {
     private String status;
 
 
-    public void updateMember(String firstName, String lastName,  UUID teamID, int age, String gender, String role, List<UUID> seasons, String status) {
+    public void updateMember(String firstName, String lastName, int age, String gender, String role, List<UUID> seasons, String status) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.teamId = teamID;
         this.age = age;
         this.gender = gender;
         this.role = role;

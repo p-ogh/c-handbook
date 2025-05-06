@@ -21,8 +21,8 @@ public class AthleteModel extends MemberModel {
     private double weight;
     private String availability;
 
-    public AthleteModel(String firstName, String lastName, UUID teamID, int age, String gender, String role, List<UUID> seasons, Date date, String status, int jerseyNumber, double height, double weight, String availability){
-        super(firstName,lastName, teamID, age,gender,role,seasons,date,status);
+    public AthleteModel(String firstName, String lastName, int age, String gender, String role, List<UUID> seasons, Date date, String status, int jerseyNumber, double height, double weight, String availability){
+        super(firstName,lastName, age,gender,role,seasons,date,status);
         this.jerseyNumber =jerseyNumber;
         this.height = height;
         this.weight =weight;

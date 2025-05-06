@@ -30,8 +30,9 @@ public class CoachControllerIntegrationTest {
     public void testPostCoach(){
         TeamModel model = new TeamModel("Team 1", "Soccer", new ArrayList<>());
         ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", model, TeamDTO.class);
+        UUID teamId = teamDTOResponseEntity.getBody().getId();
 
-        CoachModel coachEntity = new CoachModel("firstName", "lastName", teamDTOResponseEntity.getBody().getId(), 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
+        CoachModel coachEntity = new CoachModel("firstName", "lastName", 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, CoachDTO.class);
         assertEquals(coachEntity.getFirstName(), responseEntity.getBody().getFirstName());
     }
@@ -41,8 +42,9 @@ public class CoachControllerIntegrationTest {
     public void testPostCoachNoName(){
         TeamModel model = new TeamModel("Team 1", "Soccer", new ArrayList<>());
         ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", model, TeamDTO.class);
+        UUID teamId = teamDTOResponseEntity.getBody().getId();
 
-        CoachModel coachEntity = new CoachModel("", "lastName", teamDTOResponseEntity.getBody().getId(), 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
+        CoachModel coachEntity = new CoachModel("", "lastName", 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         ResponseEntity<ErrorDTO>  responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachEntity, ErrorDTO.class);
         assertEquals("First Name cannot be empty or null.", responseEntity.getBody().getMessage());
     }
@@ -51,7 +53,9 @@ public class CoachControllerIntegrationTest {
     public void testGetCoachWithCorrectID(){
         TeamModel model = new TeamModel("Team 1", "Soccer", new ArrayList<>());
         ResponseEntity<TeamDTO> teamDTOResponseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/teams/team", model, TeamDTO.class);
-        CoachModel coachModel = new CoachModel("firstName", "lastName", Objects.requireNonNull(teamDTOResponseEntity.getBody()).getId(), 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
+        UUID teamId = teamDTOResponseEntity.getBody().getId();
+
+        CoachModel coachModel = new CoachModel("firstName", "lastName", 35, "M", "manager", new ArrayList<>(), new Date(), "active", 10 );
         ResponseEntity<CoachDTO> responseEntity = restTemplate.postForEntity("http://localhost:" + port+ "/coaches/coach", coachModel, CoachDTO.class);
         ResponseEntity<CoachDTO> getResponseEntity =  restTemplate.getForEntity("http://localhost:" + port+ "/coaches/coach/"+ responseEntity.getBody().getId(), CoachDTO.class);
 
