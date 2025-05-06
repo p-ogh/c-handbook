@@ -24,11 +24,12 @@ function Player({data, caption}) {
                     <Link className="card-action" to={`/#`}><FontAwesomeIcon  className="fa-xl" icon={faCircleCheck} /></Link>
 
                     <Card.Body>
-                        <Card.Title>{data.name}</Card.Title>
+                        <Card.Text>{data.firstName}</Card.Text>
+                        <Card.Text>{data.lastName}</Card.Text>
                         <Card.Text>{data.position}</Card.Text>
                         <Card.Text>{data.status}</Card.Text>
                     </Card.Body>
-                    <Link className="card-button" to={`/team`} state={{ id: data.id }}>View Player</Link>
+                    <Link className="card-button" to={`/team`} state={{ id: data.id }}>View Player Details</Link>
                      </div>
 
 

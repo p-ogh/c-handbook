@@ -19,7 +19,7 @@ function PlayerList(){
 
             const fetchData = async () => {
                 //Fetch Data from Api
-                fetch('http://localhost:8181/teams/active')
+                fetch('http://localhost:8181/athletes/team/'+ id)
                 .then(response => response.json())
                 .then(data => setTeamData(data))
                 .catch(error => console.error('Error fetching data: ', error));
