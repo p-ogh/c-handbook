@@ -4,7 +4,6 @@ import com.pogho.theCoach.sHandbook.DTO.MatchSessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.PracticeSessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.SessionDTO;
 import com.pogho.theCoach.sHandbook.DTO.TrainingSessionDTO;
-import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.models.SessionModel;
 import com.pogho.theCoach.sHandbook.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;

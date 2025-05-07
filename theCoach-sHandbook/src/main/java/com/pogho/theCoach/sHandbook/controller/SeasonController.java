@@ -1,8 +1,6 @@
 package com.pogho.theCoach.sHandbook.controller;
 
-import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.SeasonDTO;
-import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.models.SeasonModel;
 import com.pogho.theCoach.sHandbook.service.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;

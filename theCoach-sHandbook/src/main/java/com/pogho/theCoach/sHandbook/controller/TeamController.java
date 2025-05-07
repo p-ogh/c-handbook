@@ -1,9 +1,7 @@
 package com.pogho.theCoach.sHandbook.controller;
 
-import com.pogho.theCoach.sHandbook.DTO.AthleteDTO;
 import com.pogho.theCoach.sHandbook.DTO.TeamDTO;
 import com.pogho.theCoach.sHandbook.DTO.TeamSummaryDTO;
-import com.pogho.theCoach.sHandbook.models.AthleteModel;
 import com.pogho.theCoach.sHandbook.models.TeamModel;
 import com.pogho.theCoach.sHandbook.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;

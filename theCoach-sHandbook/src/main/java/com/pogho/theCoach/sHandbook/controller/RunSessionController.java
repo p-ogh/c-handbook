@@ -1,11 +1,9 @@
 package com.pogho.theCoach.sHandbook.controller;
 
 import com.pogho.theCoach.sHandbook.DTO.RunSessionDTO;
-import com.pogho.theCoach.sHandbook.models.RunExerciseModel;
 import com.pogho.theCoach.sHandbook.service.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -52,7 +52,7 @@ public class CoachController {
 
     //updateUser
     @DeleteMapping("coach/{oid}")
-    public ResponseEntity deleteCoach(@PathVariable("oid")UUID oid)
+    public ResponseEntity<HttpStatus> deleteCoach(@PathVariable("oid")UUID oid)
     {
         coachService.deleteCoach(oid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
