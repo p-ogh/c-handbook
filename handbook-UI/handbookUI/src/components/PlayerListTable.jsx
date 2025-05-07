@@ -1,25 +1,18 @@
 import {useState, useEffect} from 'react';
 import Player from './Player.jsx'
-import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import Container from 'react-bootstrap/Container';
-//import { faShieldHalved } from '@fortawesome/free-solid-svg-icons'
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons'
 
 import AddPlayerModal from './AddPlayerModal.jsx'
 
 
-function PlayerListTable({data, onFormSubmit}) {
+function PlayerListTable({teamId, data, onFormSubmit, onHandleDelete}) {
+    const id = teamId;
 
-    const handleDeletePlayer = () => {
-        console.log('Delete a player');
-        };
-  const handleFormSubmit = (data) =>{
-                      onFormSubmit(data);
+   
+  const handleFormSubmit = (data) =>{onFormSubmit(data)}
+  const handleDelete= (data) =>{onHandleDelete(data)}
 
-        }
 
     return (
         <>
@@ -35,8 +28,7 @@ function PlayerListTable({data, onFormSubmit}) {
                         </div>
                     </div>
                     <div className= "cardButtons">
-                        <AddPlayerModal onSubmit={handleFormSubmit}/>
-                        <Button variant="primary" type="button" onClick={handleDeletePlayer}><FontAwesomeIcon icon={faTrashCan} />{" "}Delete Player</Button>
+                        <AddPlayerModal teamId={teamId} onSubmit={handleFormSubmit}/>
                     </div>
                 </div>
                 <div className="playerCards">
@@ -44,7 +36,7 @@ function PlayerListTable({data, onFormSubmit}) {
                     <Player caption='No Players to display'/> ) : (
                         <div className="row">
                             {data.map( (player) =>(
-                                <Player key={player.id} data ={player}/>
+                                <Player key={player.id} data ={player} onDelete={handleDelete}/>
                                 )
                                 ) }
                         </div>

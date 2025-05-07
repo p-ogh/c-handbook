@@ -50,16 +50,16 @@ CREATE TABLE athlete(
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
   team_id uuid NOT NULL,
-  age SMALLINT NOT NULL,
+  age SMALLINT,
   gender VARCHAR(3) NOT NULL,
   role VARCHAR(50) NOT NULL,
   seasons uuid[],
   date_added DATE NOT NULL,
   status VARCHAR(10) NOT NULL,
-  jersey_number VARCHAR(50) NOT NULL,
-  height DOUBLE PRECISION NOT NULL,
-  weight DOUBLE PRECISION NOT NULL,
-  availability VARCHAR(10) NOT NULL,
+  jersey_number VARCHAR(50),
+  height DOUBLE PRECISION,
+  weight DOUBLE PRECISION,
+  availability VARCHAR(10),
   FOREIGN KEY (team_id) REFERENCES team(id)
 );
 

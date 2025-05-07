@@ -21,7 +21,6 @@ public class TeamController {
     @Autowired
     private TeamService service;
 
-    //getAllRunsforAll Athletes
 
     @GetMapping("active")
     public ResponseEntity<List<TeamDTO>> fetchSessions()
@@ -35,43 +34,25 @@ public class TeamController {
         return new ResponseEntity<>(service.addTeam(model), HttpStatus.CREATED);
     }
 
-
-
-    //getUser
     @GetMapping("team/{id}")
     public ResponseEntity<TeamDTO> fetchTeam(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeam(id), HttpStatus.OK);
-
     }
 
-    //getUser
     @GetMapping("team/{id}/summary")
     public ResponseEntity<TeamSummaryDTO> fetchTeamSummary(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeamSummary(id), HttpStatus.OK);
-
     }
 
-//    //addUser
-//    @PostMapping("teamID/{oid}/athlete")
-//    public ResponseEntity<AthleteDTO> saveAthlete(@PathVariable("id") UUID oid, @RequestBody AthleteModel model) {
-//
-//        return new ResponseEntity<>(service.saveAthlete(oid, model), HttpStatus.CREATED);
-//
-//    }
-
-
-    //updateTeam
     @PutMapping("{id}")
     public ResponseEntity<TeamDTO> updateTeam(@PathVariable("id")UUID id, @RequestBody TeamModel model)
     {
         return new ResponseEntity<>(service.updateTeam(id, model), HttpStatus.OK);
     }
 
-
-    //updateUser
-    @DeleteMapping("teamID/{id}")
+    @DeleteMapping("team/{id}")
     public ResponseEntity<HttpStatusCode> deleteTeam(@PathVariable("id")UUID id)
     {
         service.deleteTeam(id);

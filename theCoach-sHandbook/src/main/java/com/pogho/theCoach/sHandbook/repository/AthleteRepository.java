@@ -1,9 +1,7 @@
 package com.pogho.theCoach.sHandbook.repository;
 
 import com.pogho.theCoach.sHandbook.DAO.Athlete;
-import com.pogho.theCoach.sHandbook.DAO.Coach;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.UUID;

@@ -15,42 +15,34 @@ import java.util.UUID;
 @RequestMapping("/athletes")
 @RestController
 public class AthleteController {
+
     @Autowired
     private AthleteService service;
 
-    //getUsers
     @GetMapping("all")
     public ResponseEntity<List<AthleteDTO>> fetchAthletesList()
     {
         return new ResponseEntity<>(service.fetchAthletesList(), HttpStatus.OK);
-
     }
-    //getUsers
+
     @GetMapping("team/{id}")
     public ResponseEntity<List<AthleteDTO>> fetchTeamAthletes(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchTeamAthletes(id), HttpStatus.OK);
-
     }
 
-    //getUser
     @GetMapping("athlete/{id}")
     public ResponseEntity<AthleteDTO> fetchAthlete(@PathVariable("id") UUID id)
     {
         return new ResponseEntity<>(service.fetchAthlete(id), HttpStatus.OK);
-
     }
 
-    //addUser
-    @PostMapping("team/{id}/add")
+    @PostMapping("team/{id}")
     public ResponseEntity<AthleteDTO> saveAthlete(@PathVariable("id") UUID id, @RequestBody AthleteModel athlete) {
 
         return new ResponseEntity<>(service.saveAthlete(id, athlete), HttpStatus.CREATED);
-
     }
 
-
-    //updateUser
     @PutMapping("athlete/{oid}")
     public ResponseEntity<AthleteDTO> updateAthlete(@PathVariable("oid")UUID oid, @RequestBody AthleteModel athlete)
     {
@@ -58,7 +50,6 @@ public class AthleteController {
     }
 
 
-    //updateUser
     @DeleteMapping("athlete/{oid}")
     public ResponseEntity<HttpStatusCode> deleteAthlete(@PathVariable("oid")UUID oid)
     {

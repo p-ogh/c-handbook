@@ -13,27 +13,41 @@ function PlayerList(){
      const location = useLocation();
         const { id } = location.state;
 
-        const [teamData, setTeamData] = useState([]);
-            useEffect(() => {fetchData();
+        const [playersData, setPlayersData] = useState([]);
+        useEffect(() => {fetchPlayerData();
                 },[]);
 
-            const fetchData = async () => {
+        const fetchPlayerData = async () => {
                 //Fetch Data from Api
                 fetch('http://localhost:8181/athletes/team/'+ id)
                 .then(response => response.json())
-                .then(data => setTeamData(data))
+                .then(data => setPlayersData(data))
                 .catch(error => console.error('Error fetching data: ', error));
             };
         const handleFormSubmit = (data) =>{
-                setTeamData(teamData => [...teamData, data]);
+            setPlayersData(playersData => [...playersData, data]);
             }
+            const handleDelete = (data) =>{console.log("player was deleted")   }
+
+
+                    const [teamsData, setTeamsData] = useState([]);
+                    useEffect(() => {fetchData();
+                        },[]);
+                
+                    const fetchData = async () => {
+                                //Fetch Data from Api
+                        fetch('http://localhost:8181/teams/active')
+                        .then(response => response.json())
+                        .then(data => setTeamsData(data))
+                        .catch(error => console.error('Error fetching data: ', error));
+                            };
 
     return(
         <>
             <Header/>
             <div className='app-main'>
-                <Sidebar data ={teamData} onFormSubmit={handleFormSubmit}/>
-                <PlayerListTable data ={teamData} onFormSubmit={handleFormSubmit}/>
+                <Sidebar data ={teamsData} onFormSubmit={handleFormSubmit}/>
+                <PlayerListTable teamId ={id} data ={playersData} onFormSubmit={handleFormSubmit} onHandleDelete={handleDelete}/>
             </div>
             <Footer/>
         </>
